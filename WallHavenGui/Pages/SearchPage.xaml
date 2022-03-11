@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="WallHavenGui.Pages.SearchPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:content="using:WallHavenGui.UserContent" xmlns:musx="using:Microsoft.UI.Xaml.Controls" xmlns:animated="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+    mc:Ignorable="d"
+    
+    Background="Transparent">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Background="Transparent" x:Name="AppBar"/>
+        <Button Height="25" Click="Button_Click" 
+                Margin="5 10 0 0"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left"  
+                        x:Name="BackButton">
+            
+            <musx:AnimatedIcon>
+                <musx:AnimatedIcon.Source>
+                    <animated:AnimatedBackVisualSource/>
+                </musx:AnimatedIcon.Source>
+                <musx:AnimatedIcon.FallbackIconSource>
+                    <musx:SymbolIconSource Symbol="Back"/>
+                </musx:AnimatedIcon.FallbackIconSource>
+            </musx:AnimatedIcon>
+        </Button>
+        <content:SearchContent Grid.Row="1" x:Name="searchcontent" ></content:SearchContent>
+    </Grid>
+</Page>

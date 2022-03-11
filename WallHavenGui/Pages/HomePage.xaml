@@ -1,0 +1,60 @@
+﻿<Page
+    x:Class="WallHavenGui.Pages.HomePage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.Pages"
+    xmlns:data="using:WallEventGUI.WallHavenTools"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:musx="using:Microsoft.UI.Xaml.Controls"
+    
+    Loaded="{x:Bind vm.load}"
+    xmlns:datatemple="using:WallHavenGui.DataTemple"
+    xmlns:convert="using:WallEventGUI.Converter"
+    NavigationCacheMode="Required"
+    xmlns:an1="using:Microsoft.Toolkit.Uwp.UI.Animations"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
+    xmlns:Custom="using:Microsoft.Xaml.Interactivity" xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core" xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals" xmlns:convert1="using:WallHavenGui.Converter"
+    mc:Ignorable="d"
+    musx:BackdropMaterial.ApplyToRootOrPageBackground="True"
+    Background="Transparent">
+    <Page.Resources>
+        <convert1:ViewConvert x:Key="ViewConvert"></convert1:ViewConvert>
+
+        
+    </Page.Resources>
+    <Grid Margin="10 20 10 20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="{x:Bind vm.PageTitle,Mode=TwoWay}" FontSize="15" Margin="0 0 0 5"/>
+        <controls:AdaptiveGridView
+            ItemHeight="150"
+            DesiredWidth="250"
+            Grid.Row="1"
+            x:Name="MyGridView"
+            ItemsSource="{x:Bind Mode=TwoWay, Path=vm.Walls.WallpaperList}"
+            SelectionChanged="{x:Bind vm.Changed}">
+            <controls:AdaptiveGridView.ItemTemplate>
+                <DataTemplate x:Name="HomeTemple" x:DataType="data:Wallpaper">
+                    <datatemple:WallpaperShow MyData="{Binding}"/>
+                </DataTemplate>
+            </controls:AdaptiveGridView.ItemTemplate>
+            <controls:AdaptiveGridView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                </TransitionCollection>
+            </controls:AdaptiveGridView.ItemContainerTransitions>
+            <Custom:Interaction.Behaviors>
+                <Custom1:EventTriggerBehavior EventName="Loaded">
+                    <Custom1:InvokeCommandAction Command="{x:Bind vm.ScrlLoad}" CommandParameter="{x:Bind MyGridView}"/>
+                </Custom1:EventTriggerBehavior>
+            </Custom:Interaction.Behaviors>
+            </controls:AdaptiveGridView>
+        <StackPanel Grid.Row="2">
+            <musx:ProgressBar IsIndeterminate="{x:Bind Mode=TwoWay, Path=vm._ProCess}"/>
+        </StackPanel>
+    </Grid>
+</Page>

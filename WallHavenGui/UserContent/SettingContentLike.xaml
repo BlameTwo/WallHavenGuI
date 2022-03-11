@@ -1,0 +1,36 @@
+﻿<musx:Expander
+    xmlns:musx="using:Microsoft.UI.Xaml.Controls"
+    x:Class="WallHavenGui.UserContent.SettingContentLike"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.UserContent"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    IsEnabled="True"
+    d:DesignHeight="300"
+    Style="{ThemeResource PivotTitleContentControlStyle}"
+    d:DesignWidth="400">
+
+    <musx:Expander.Header>
+        <TextBlock Text="收藏页"/>
+    </musx:Expander.Header>
+    <musx:Expander.Content>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="收藏页一次加载数量"/>
+            <musx:NumberBox
+                Margin="10 0 0 0"
+                SpinButtonPlacementMode="Compact"
+                Grid.Column="1"
+                x:Name="NumberBox"
+                SmallChange="24"
+                Minimum="2"
+                ValueChanged="NumberBox_ValueChanged"
+                Maximum="100"/>
+        </Grid>
+    </musx:Expander.Content>
+</musx:Expander>

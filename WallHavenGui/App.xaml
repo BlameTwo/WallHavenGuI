@@ -1,0 +1,17 @@
+﻿<Application
+    x:Class="WallEventGUI.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:Microsoft.UI.Xaml.Controls" xmlns:media="using:Microsoft.UI.Xaml.Media">
+    <Application.Resources>
+        <controls:XamlControlsResources>
+            <controls:XamlControlsResources.MergedDictionaries>
+                <ResourceDictionary>
+                    <media:AcrylicBrush x:Key="BrushTran" BackgroundSource="Backdrop"
+            TintOpacity="0" TintLuminosityOpacity="0" TintColor="White" FallbackColor="White" />
+                </ResourceDictionary>
+
+            </controls:XamlControlsResources.MergedDictionaries>
+        </controls:XamlControlsResources>
+    </Application.Resources>
+</Application>

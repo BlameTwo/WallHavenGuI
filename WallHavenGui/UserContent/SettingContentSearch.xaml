@@ -1,0 +1,46 @@
+﻿<musx:Expander
+    xmlns:musx="using:Microsoft.UI.Xaml.Controls"
+    x:Class="WallHavenGui.UserContent.SettingContentSearch"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.UserContent"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Style="{ThemeResource PivotTitleContentControlStyle}"
+    Background="Transparent">
+
+    <musx:Expander.Header>
+        <TextBlock Text="搜索"/>
+    </musx:Expander.Header>
+    <musx:Expander.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock
+                VerticalAlignment="Center"
+                Text="离开搜索页面时保存搜索配置"/>
+            <ToggleSwitch Grid.Column="1"
+                          x:Name="SwitchOpen"
+                          Toggled="ToggleSwitch_Toggled"
+                          Margin="15 0 0 0"/>
+            <TextBlock Text="搜索翻译"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center" 
+                       Grid.Row="1"/>
+            <ComboBox VerticalAlignment="Center"
+                      x:Name="FanYiItems"
+                      SelectionChanged="FanYiItems_SelectionChanged"
+                      Margin="15 0 0 0"
+                      DisplayMemberPath="Name"
+                      Grid.Row="1" Grid.Column="1"
+                      Width="100"/>
+        </Grid>
+    </musx:Expander.Content>
+</musx:Expander>

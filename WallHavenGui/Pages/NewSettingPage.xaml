@@ -1,0 +1,52 @@
+﻿<Page
+    x:Class="WallHavenGui.Pages.NewSettingPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:content="using:WallHavenGui.UserContent"
+    Background="Transparent">
+
+    <Grid Background="Transparent" Margin="25">
+        <ScrollViewer>
+            <StackPanel>
+                <TextBlock Text="通用" FontSize="25"/>
+                <content:SettingContentHome 
+                    HorizontalContentAlignment="Left" 
+                    VerticalContentAlignment="Top" 
+                    Background="Transparent"
+                    Margin="5 10"
+                    HorizontalAlignment="Stretch" VerticalAlignment="Top" />
+                <content:SettingContentSearch
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Top"
+                  
+                Background="Transparent"
+                Margin="5 10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Top">
+
+                </content:SettingContentSearch>
+                <content:Account
+                    HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Top"
+                Background="Transparent"
+                Margin="5 10"
+                HorizontalAlignment="Stretch" VerticalAlignment="Top">
+
+                </content:Account>
+                <content:SettingContentWallPage
+                    HorizontalContentAlignment="Left"
+                    Margin="5 10"
+                    HorizontalAlignment="Stretch" />
+
+                <content:SettingContentLike
+                    HorizontalContentAlignment="Left"
+                    Margin="5 10"
+                    HorizontalAlignment="Stretch" />
+            </StackPanel>
+        </ScrollViewer>
+        
+    </Grid>
+</Page>

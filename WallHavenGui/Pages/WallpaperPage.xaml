@@ -1,0 +1,241 @@
+﻿<Page
+    x:Class="WallHavenGui.Pages.WallpaperPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:musx="using:Microsoft.UI.Xaml.Controls" xmlns:animated="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals"
+    mc:Ignorable="d"
+    musx:BackdropMaterial.ApplyToRootOrPageBackground="True"
+    xmlns:data="using:WallEventGUI.WallHavenTools" xmlns:media="using:Microsoft.UI.Xaml.Media" xmlns:convert="using:WallHavenGui.Converter"
+    Loaded="Page_Loaded"
+    Background="Transparent">
+    <Page.Resources>
+        <convert:FactorConvert x:Key="FactorConvert"/>
+        <DataTemplate x:Key="ColorTag" x:DataType="data:ColorTag">
+            <StackPanel Background="{Binding color}"
+                        Width="35" Height="35"></StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="Tags" x:DataType="data:WallpaperTag">
+            <TextBlock Padding="5" TextWrapping="Wrap" Text="{x:Bind TagName}"/>
+        </DataTemplate>
+        <ResourceDictionary x:Key="Default">
+            <media:AcrylicBrush x:Key="TranBrush" BackgroundSource="Backdrop"
+            TintOpacity="0" TintColor="#FF000000" FallbackColor="#FF008000" />
+        </ResourceDictionary>
+    </Page.Resources>
+    <ScrollViewer>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Min800">
+                    <VisualState.Setters>
+                        <Setter Target="DataScroll.(Grid.Row)" Value="1"/>
+                        <Setter Target="DataScroll.(Grid.Column)" Value="0"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+                <VisualState x:Name="Min0">
+                    <VisualState.Setters>
+                        <Setter Target="DataScroll.(Grid.Row)" Value="0"/>
+                        <Setter Target="DataScroll.(Grid.Column)" Value="1"/>
+                    </VisualState.Setters>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Grid>
+            
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <musx:TeachingTip x:Name="DownloadTip">
+                <musx:TeachingTip.IconSource>
+                    <musx:SymbolIconSource Symbol="Download" />
+                    
+                </musx:TeachingTip.IconSource>
+            </musx:TeachingTip>
+            <Button Height="25" Click="Button_Click" 
+                Margin="5 0 0 0"
+                        VerticalAlignment="Center" 
+                        HorizontalAlignment="Left"  
+                        x:Name="BackButton">
+                <musx:AnimatedIcon>
+                    <musx:AnimatedIcon.Source>
+                        <animated:AnimatedBackVisualSource/>
+                    </musx:AnimatedIcon.Source>
+                    <musx:AnimatedIcon.FallbackIconSource>
+                        <musx:SymbolIconSource Symbol="Back"/>
+                    </musx:AnimatedIcon.FallbackIconSource>
+                </musx:AnimatedIcon>
+            </Button>
+            <StackPanel Background="Transparent" Margin="35 0 0 0" Orientation="Horizontal" x:Name="AppBar" Height="35">
+                <TextBlock Margin="10 0 0 0" Text="WallHavenGUI--UWP" VerticalAlignment="Center" FontSize="20" FontWeight="Bold"/>
+            </StackPanel>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <ScrollViewer x:Name="DataScroll" VerticalScrollBarVisibility="Visible" Grid.Column="1" Padding="10">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock x:Name="Size" RelativePanel.RightOf="BackButton" FontSize="25" HorizontalAlignment="Center"/>
+                        <TextBlock x:Name="SourceText" 
+                               Text="无源" 
+                           Grid.Row="1"
+                               RelativePanel.AlignBottomWithPanel="True"
+                               RelativePanel.AlignBottomWith="Size" 
+                               HorizontalAlignment="Center" />
+                        <GridView Grid.Row="2"
+                                HorizontalAlignment="Center" 
+                              ItemTemplate="{StaticResource ColorTag}"
+                              x:Name="ColorGridView">
+
+                        </GridView>
+
+                        <musx:Expander Header="标签" Grid.Row="4" Width="400" HorizontalAlignment="Center" >
+                            <ListView HorizontalAlignment="Center" Margin="10 0"
+                                  SelectionChanged="TagGridView_SelectionChanged"
+                              ItemTemplate="{StaticResource Tags}"
+                              x:Name="TagGridView"/>
+                        </musx:Expander>
+
+                        <musx:Expander HorizontalAlignment="Center"  Grid.Row="3" Header="用户" Width="400">
+                            <Border Grid.Row="3" Margin="10" CornerRadius="10" Padding="10">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition Height="auto"/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition  Width="auto"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="观看人数：" Grid.Row="1"/>
+                                    <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
+                                        <Ellipse Height="60" Width="60" HorizontalAlignment="Center"  >
+                                            <Ellipse.Fill>
+                                                <ImageBrush x:Name="UserImage" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                        <HyperlinkButton x:Name="UserName" 
+                                                         Click="UserName_Click"
+                                                 HorizontalAlignment="Center" />
+                                    </StackPanel>
+                                    <TextBlock Text="文件大小：" Grid.Row="2"/>
+                                    <TextBlock Text="分类：" Grid.Row="3" x:Name="PurityText" VerticalAlignment="Center" />
+                                    <TextBlock Text="喜欢人数：" Grid.Row="4"/>
+                                    <TextBlock Text="链接：" VerticalAlignment="Center"  Grid.Row="5" />
+                                    <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="13 0 0 0"  x:Name="WallpaperViews"/>
+                                    <TextBlock Grid.Column="1" Grid.Row="2" x:Name="WallpaperSize" Margin="13 0 0 0" HorizontalAlignment="Left" />
+                                    <HyperlinkButton Click="WallpaperPurity_Click" Grid.Column="1" Grid.Row="3" x:Name="WallpaperPurity" HorizontalAlignment="Left" />
+                                    <TextBlock Grid.Column="1" Grid.Row="4" x:Name="Farvorites" Margin="13 0 0 0" HorizontalAlignment="Left" />
+                                    <HyperlinkButton Grid.Column="1" Click="Link_Click" Grid.Row="5" x:Name="Link"  HorizontalAlignment="Left" />
+                                </Grid>
+                            </Border>
+                        </musx:Expander>
+                        <StackPanel
+                            Margin="0 10 0 0"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center" 
+                            Grid.Row="5">
+                            <Button
+                                x:Name="SetWallpaper"
+                                Click="Button_Click_3"
+                                Content="设置壁纸">
+                            </Button>
+                            <Button 
+                                Margin="10 0 0 0"
+                                Click="Button_Click_4"
+                                Content="更多此类壁纸"/>
+                            <Button Style="{ThemeResource AccentButtonStyle}"
+                                    Margin="10 0 0 0"
+                                    Click="Button_Click_5"
+                                    Content="加入到收藏"/>
+                            <Button Style="{ThemeResource AccentButtonStyle}"
+                                    Margin="10 0 0 0"
+                                    Click="Button_Click_6"
+                                    Content="更多收藏"/>
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <ScrollViewer
+                        Grid.RowSpan="1" Margin="10 0" Grid.Row="1" ZoomMode="Enabled" 
+                              Grid.Column="0"
+                              DoubleTapped="WallpaperScroll_DoubleTapped"
+                              x:Name="WallpaperScroll"
+                              MinZoomFactor="1">
+                        <Grid>
+                            <musx:ProgressRing 
+                                IsActive="True" 
+                                Height="80"
+                                x:Name="RingPro"
+                                Width="80"></musx:ProgressRing>
+                            <Image x:Name="Wallpaper"
+                                   Grid.Column="0"  Stretch="Uniform"/>
+                        </Grid>
+                    </ScrollViewer>
+                    <Border CornerRadius="10"
+                            Padding="10"
+                            HorizontalAlignment="Center" Margin="10 0">
+                        <Grid>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Style="{ThemeResource AccentButtonStyle}"
+                                    ToolTipService.ToolTip="保存到图片库"
+                                    x:Name="DownPic"
+                                    Click="Button_Click_1"
+                                    >
+                                    <SymbolIcon Symbol="Download"/>
+                                </Button>
+                                <Button Style="{ThemeResource AccentButtonStyle}"
+                                    Click="Button_Click_2"
+                                    x:Name="DownPath"
+                                    Margin="10 0 0 0"
+                                    ToolTipService.ToolTip="选择路径保存"
+                                    >
+                                    <SymbolIcon Symbol="Document"/>
+                                </Button>
+                                <TextBlock
+                                Margin="10 0 0 0"
+                            VerticalAlignment="Center" 
+                            Foreground="{ThemeResource AppBarItemForegroundThemeBrush}"
+                            Text="{x:Bind WallpaperScroll.ZoomFactor,Converter={StaticResource FactorConvert},Mode=OneWay}"/>
+                            </StackPanel>
+                        </Grid>
+                    </Border>
+                </Grid>
+                
+                
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+    
+</Page>

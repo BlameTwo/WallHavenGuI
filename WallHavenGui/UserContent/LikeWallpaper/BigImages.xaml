@@ -1,0 +1,90 @@
+﻿<UserControl
+    x:Class="WallHavenGui.UserContent.LikeWallpaper.BigImages"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.UserContent.LikeWallpaper"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:musx="using:Microsoft.UI.Xaml.Controls" 
+    xmlns:data="using:WallHavenGui.Model" 
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls" 
+    xmlns:datatemple="using:WallHavenGui.DataTemple" 
+    xmlns:data1="using:WallEventGUI.WallHavenTools" 
+    xmlns:i="using:Microsoft.Xaml.Interactivity" 
+    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+    xmlns:content="using:WallHavenGui.UserContent">
+
+    <Grid Margin="0 10 0 0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel 
+            
+                RelativePanel.AlignVerticalCenterWithPanel="True" 
+                Orientation="Vertical">
+            <CheckBox Margin="10 0 0 10" x:Name="Selectmode" Content="开启多选" Checked="CheckBox_Checked" Unchecked="CheckBox_Checked"/>
+            <Button Content="删除选中" Width="auto" Margin="5 0 0 5" Click="Button_Click"></Button>
+            <Button Content="复制选中……" Margin="5 0 0 5" Click="Button_Click_2"/>
+            <Button Content="删除目标相册" Click="Button_Click_1" Margin="5 0 0 5"/>
+            <Button Content="创建收藏夹" Click="Button_Click_3" Margin="5 0 0 5"/>
+        </StackPanel>
+        <musx:NavigationView
+            PaneTitle="相册"
+            IsPaneOpen="True"
+            Grid.Column="1"
+            x:Name="Navtation"
+            IsBackButtonVisible="Collapsed"
+            PaneDisplayMode="Top"
+            SelectionChanged="Navtation_SelectionChanged"
+            IsSettingsVisible="False"
+            Loaded="Navtation_Loaded">
+            <musx:NavigationView.MenuItemTemplate>
+                <DataTemplate x:Name="MyTemolate" x:DataType="data:BigClass">
+                    <StackPanel Orientation="Horizontal" Margin="5   0 0 0">
+                        <TextBlock  Text ="♥" FontSize="20" Foreground="Red"/>
+                        <TextBlock Text="{x:Bind Name}" VerticalAlignment="Center" 
+                                   Margin="15 0 0 0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </musx:NavigationView.MenuItemTemplate>
+            <musx:NavigationView.Content>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <musx:TeachingTip x:Name="Tip">
+                        <musx:TeachingTip.IconSource>
+                            <musx:SymbolIconSource Symbol="Account" />
+                        </musx:TeachingTip.IconSource>
+                    </musx:TeachingTip>
+                    <controls:AdaptiveGridView x:Name="MyContent" 
+                                SelectionMode="Single"
+                                DesiredWidth="250"
+                                SelectionChanged="MyContent_SelectionChanged"
+                                ItemHeight="150">
+                        <controls:AdaptiveGridView.ItemContainerTransitions>
+                            <TransitionCollection>
+                                <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                            </TransitionCollection>
+                        </controls:AdaptiveGridView.ItemContainerTransitions>
+                        <controls:AdaptiveGridView.ItemTemplate>
+                            <DataTemplate x:Name="MyData" x:DataType="data1:Wallpaper">
+                                <datatemple:WallpaperShow MyData="{Binding}"/>
+                            </DataTemplate>
+                        </controls:AdaptiveGridView.ItemTemplate>
+                    </controls:AdaptiveGridView>
+
+                    <Button
+                        HorizontalAlignment="Center" 
+                        Grid.Row="1"
+                        Margin="0 10 0 10"
+                        Content="加载更多" 
+                        Style="{ThemeResource  AccentButtonStyle}" Click="Button_Click_4"/>
+                </Grid>
+            </musx:NavigationView.Content>
+        </musx:NavigationView>
+    </Grid>
+</UserControl>
