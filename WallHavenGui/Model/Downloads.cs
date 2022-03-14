@@ -11,7 +11,7 @@ namespace WallHavenGui.Model
     public class Downloads
     {
 
-        public async Task<string> SaveImage(string imageUri, StorageFolder folder,string localfile)
+        public static async Task<string> SaveImage(string imageUri, StorageFolder folder,string localfile)
         {
             try
             {

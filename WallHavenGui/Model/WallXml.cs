@@ -76,12 +76,20 @@ namespace WallHavenGui.Model
             small.SetAttribute("Name", "Default");
             foreach (var item in id)
             {
-                var wallpaper = WriteImage(item);     //这里返回的是一个string字符串，也就是处理完毕的XmlElment
-                XmlDocument xmldoc2 = new XmlDocument();
-                xmldoc2.LoadXml(wallpaper);
-                var list = xmldoc2.SelectSingleNode("Wallpaper");
-                var result = small.OwnerDocument.ImportNode(list, true);
-                small.AppendChild(result);
+                WallXml wallxml = new WallXml();
+                if (await wallxml.SmallExits(item.id, Name))
+                {
+                    continue;
+                }
+                else
+                {
+                    var wallpaper = WriteImage(item);     //这里返回的是一个string字符串，也就是处理完毕的XmlElment
+                    XmlDocument xmldoc2 = new XmlDocument();
+                    xmldoc2.LoadXml(wallpaper);
+                    var list = xmldoc2.SelectSingleNode("Wallpaper");
+                    var result = small.OwnerDocument.ImportNode(list, true);
+                    small.AppendChild(result);
+                }
             }
             bigs.AppendChild(small);
             xmldoc.Save(file.Path);
@@ -112,12 +120,19 @@ namespace WallHavenGui.Model
             }
             foreach (var item in lists)
             {
-                string xmlstring = WriteImage(item);
-                XmlDocument xmldoc2 = new XmlDocument();
-                xmldoc2.LoadXml(xmlstring);
-                XmlElement newimage = (XmlElement)xmldoc2.SelectSingleNode("Wallpaper");
-                var result = xmlelment.OwnerDocument.ImportNode(newimage, true);            //首先使用此方法将两个文档连接起来，才可以互相添加
-                xmlelment.AppendChild(result);
+                if(await SmallExits(item.id, Name))
+                {
+                    continue;
+                }
+                else
+                {
+                    string xmlstring = WriteImage(item);
+                    XmlDocument xmldoc2 = new XmlDocument();
+                    xmldoc2.LoadXml(xmlstring);
+                    XmlElement newimage = (XmlElement)xmldoc2.SelectSingleNode("Wallpaper");
+                    var result = xmlelment.OwnerDocument.ImportNode(newimage, true);            //首先使用此方法将两个文档连接起来，才可以互相添加
+                    xmlelment.AppendChild(result);
+                }
             }
             Thread.Sleep(200);
             xmldoc.Save(file.Path);
@@ -247,6 +262,46 @@ namespace WallHavenGui.Model
                 string a = sw.ToString();
                 return a;
             }
+        }
+
+
+        public async Task<bool> BigExits(string Name)
+        {
+            WallFile wallfile = new WallFile();
+            string xmlstr = await wallfile.GetXmlString();
+            XmlDocument xmldoc = new XmlDocument(); 
+            xmldoc.LoadXml(xmlstr);
+            var elment = xmldoc.SelectSingleNode($"//WallpaperSmalls[@Name='{Name}']");
+            if(elment != null)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        public async Task<bool> SmallExits(string id,string Name)
+        {
+            WallFile wallfile = new WallFile();
+            string xmlstr = await wallfile.GetXmlString();
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(xmlstr);
+            var small = xmldoc.SelectSingleNode($"//WallpaperSmalls[@Name='{Name}']");
+            foreach (var item in small.SelectNodes("./Wallpaper"))
+            {
+                XmlElement xmlel = (XmlElement)item;
+                string txt = xmlel.SelectSingleNode("./id").InnerText;
+                if(txt == id)
+                {
+                    return true;
+                }
+                else
+                {
+                    continue;
+                }
+                
+            }
+            return false;
         }
 
 

@@ -172,6 +172,7 @@
                                 Content="更多此类壁纸"/>
                             <Button Style="{ThemeResource AccentButtonStyle}"
                                     Margin="10 0 0 0"
+                                    x:Name="DefaultName"
                                     Click="Button_Click_5"
                                     Content="加入到收藏"/>
                             <Button Style="{ThemeResource AccentButtonStyle}"

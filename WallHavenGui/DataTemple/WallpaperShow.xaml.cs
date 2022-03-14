@@ -29,8 +29,9 @@ namespace WallHavenGui.DataTemple
         public WallpaperShow()
         {
             this.InitializeComponent();
-            
         }
+
+        
 
         public Wallpaper MyData
         {
@@ -58,16 +59,16 @@ namespace WallHavenGui.DataTemple
             {
                 string nu = MyData.ImageType == "image/jpeg" ? ".jpg" : ".png";
                 string type =$"{MyData.id}{nu}";
-                string result = await dl.SaveImage(MyData.WallpaperUrl, folder, type);
+                DownloadTask.AddAsync(Downloads.SaveImage(MyData.WallpaperUrl, folder, type));
             }
         }
 
-        private async void SavePictureLibary_Click(object sender, RoutedEventArgs e)
+        private  void SavePictureLibary_Click(object sender, RoutedEventArgs e)
         {
             var folder = KnownFolders.PicturesLibrary;
             string nu = MyData.ImageType == "image/jpeg" ? ".jpg" : ".png";
             string type = MyData.id + nu;
-            string Title = await dl.SaveImage(MyData.WallpaperUrl, folder, type);
+            DownloadTask.AddAsync(Downloads.SaveImage(MyData.WallpaperUrl, folder, type));
         }
 
         private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)

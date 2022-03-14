@@ -183,8 +183,9 @@ namespace WallEventGUI.UserContent.ContentVM
             PurityString = UIConvert.GetLevel(_PurityCS);
             CatString = UIConvert.GetLevel(_CatCs);
             SortingString = UIConvert.GetSorting<Sorting>(Sorting);
-            
-            tools.OpenKey = string.IsNullOrWhiteSpace(ApiKey)||ApiKey == null ? false : true;
+
+            //tools.OpenKey = string.IsNullOrWhiteSpace(ApiKey)||ApiKey == null ? false : true;
+            tools.OpenKey = System.Convert.ToBoolean(home.SettingGetConfig(AppSettingArgs.Is18));
             tools.Key = tools.OpenKey ? ApiKey : null;
             searchSorting = UIConvert.GetEnumSorting(SortingString);
             

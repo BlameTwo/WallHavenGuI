@@ -10,7 +10,7 @@
                     <media:AcrylicBrush x:Key="BrushTran" BackgroundSource="Backdrop"
             TintOpacity="0" TintLuminosityOpacity="0" TintColor="White" FallbackColor="White" />
                 </ResourceDictionary>
-
+                <ResourceDictionary Source="/Style/SelectWallpaper.xaml"/>
             </controls:XamlControlsResources.MergedDictionaries>
         </controls:XamlControlsResources>
     </Application.Resources>

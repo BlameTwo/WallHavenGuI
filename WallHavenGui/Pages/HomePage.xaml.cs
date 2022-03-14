@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Markup;
 using Windows.Storage;
+using WallHavenGui.Model;
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
 namespace WallHavenGui.Pages
@@ -38,14 +39,13 @@ namespace WallHavenGui.Pages
 
         private void HomePage_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            //Column1.Width = new GridLength(FitWidth.Getwidth(ActualWidth, 250, 250));
         }
 
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-
             this.SizeChanged -= HomePage_SizeChanged;
+            
             base.OnNavigatingFrom(e);
         }
     }

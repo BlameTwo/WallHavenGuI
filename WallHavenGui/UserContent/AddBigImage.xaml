@@ -6,16 +6,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400" Loaded="{x:Bind vm.Loaded}">
+    Loaded="{x:Bind vm.Loaded}">
 
-    <StackPanel VerticalAlignment="Center" >
-        <TextBox MaxLength="20" 
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+       
+        <TextBox
+            Grid.Row="0"
+            MaxLength="20" 
                  x:Name="TextName" 
                  Text="{x:Bind vm.BigName,Mode=TwoWay}"/>
-        <Button Content="添加收藏夹" 
-                Margin="0 20 0 0"
-                HorizontalAlignment="Center" 
+        <StackPanel Margin="0 10 0 0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center"  VerticalAlignment="Center" >
+            <Button Content="添加收藏夹" 
+                Grid.Row="1"
+                    VerticalAlignment="Center" 
                 Command="{x:Bind vm.CreateBigImage}"></Button>
-    </StackPanel>
+
+            <Button Click="Button_Click" Margin="20 0 0 0" VerticalAlignment="Center" >
+                <SymbolIcon Symbol="Clear"/>
+            </Button>
+        </StackPanel>
+    </Grid>
 </UserControl>

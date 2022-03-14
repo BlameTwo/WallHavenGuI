@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using WallHavenGui.Model;
 using WallHavenGui.Pages;
 using Windows.ApplicationModel.Core;
 using Windows.Foundation;
@@ -37,14 +38,14 @@ namespace WallEventGUI
                 Naviga.SelectedItem = sender.SelectedItem;
             MyFrame.GoBack();
         }
+        FrameNavigationOptions navOptions = new FrameNavigationOptions();
 
-
-        private void Naviga_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
-        {
-            FrameNavigationOptions navOptions = new FrameNavigationOptions();
-
-            navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
+        
             Type typepage = null;
+
+        private async void Naviga_SelectionChanged(Microsoft.UI.Xaml.Controls.NavigationView sender, Microsoft.UI.Xaml.Controls.NavigationViewSelectionChangedEventArgs args)
+        {
+            navOptions.TransitionInfoOverride = args.RecommendedNavigationTransitionInfo;
             if (args.SelectedItem == HomeSml)
             {
                 typepage = typeof(HomePage);
@@ -59,9 +60,27 @@ namespace WallEventGUI
                 typepage = typeof(DocumentPage);
             if (args.IsSettingsSelected == true)
                 typepage = typeof(NewSettingPage);
-
             if(args.SelectedItem == HelpPage)
                 typepage = typeof(HelpPage);
+            if (DownloadTask.Wait() == false)
+            {
+                ContentDialog dialog = new ContentDialog();
+                dialog.Title = "检查到有下载任务未完成，是否跳转页面？";
+                dialog.PrimaryButtonText = "无视任务";
+                dialog.PrimaryButtonClick += Dialog_PrimaryButtonClick;
+                dialog.CloseButtonText = "取消";
+                await dialog.ShowAsync();
+            }
+            else
+            {
+                MyFrame.Navigate(typepage, null, new DrillInNavigationTransitionInfo());
+            }
+        }
+
+       
+
+        private void Dialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        {
             MyFrame.Navigate(typepage, null, new DrillInNavigationTransitionInfo());
         }
 

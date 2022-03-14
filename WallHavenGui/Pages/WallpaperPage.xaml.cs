@@ -79,7 +79,7 @@ namespace WallHavenGui.Pages
         {
             WallHevenSettingResource home = new WallHevenSettingResource();
             ApiKey = home.SettingGetConfig(AppSettingArgs.OpenKey) == "" ? "" : home.SettingGetConfig(AppSettingArgs.OpenKey);
-            OpenKey = string.IsNullOrWhiteSpace(ApiKey) ? false : true;
+            OpenKey =System.Convert.ToBoolean( home.SettingGetConfig(AppSettingArgs.Is18));
             Tools tools = new Tools() { Key = ApiKey, OpenKey = this.OpenKey };
             MyWallpaper = await tools.GetWallpaperAsync(MyWallpaper.id);
             full = MyWallpaper.ImageType == "image/jpeg" ? ".jpg" : ".png";
@@ -88,6 +88,13 @@ namespace WallHavenGui.Pages
             {
                 Init(home);
             }
+
+            WallXml xml = new WallXml();
+            if (await xml.SmallExits(MyWallpaper.id, "Default"))
+            {
+                DefaultName.IsEnabled = false;
+            }
+
         }
 
         void Init(WallHevenSettingResource home)
@@ -233,7 +240,7 @@ namespace WallHavenGui.Pages
         {
             var folder = KnownFolders.PicturesLibrary;
             folder =await folder.CreateFolderAsync("WallHavenImages");
-            DownloadTip.Title =  await dl.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
+            DownloadTip.Title =  await Downloads.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
             DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到本机图片库中" : "下载失败了哦！请检查网络。";
             DownloadTip.IsOpen = true;
         }
@@ -247,7 +254,7 @@ namespace WallHavenGui.Pages
             var folder = await pick.PickSingleFolderAsync();
             if (folder != null)
             {
-                DownloadTip.Title = await dl.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
+                DownloadTip.Title = await Downloads.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
                 DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到目标文件夹" : "下载失败了哦！请检查网络。";
                 DownloadTip.IsOpen = true;
             }
@@ -299,6 +306,7 @@ namespace WallHavenGui.Pages
             List<Wallpaper> wallpaperlist = new List<Wallpaper>();  
             wallpaperlist.Add(MyWallpaper);
             xml.SaveDefaultImageId(await wallfile.FileExites(), wallpaperlist, "Default");
+            DefaultName.IsEnabled = false;
         }
 
         private async void Button_Click_6(object sender, RoutedEventArgs e)
@@ -326,7 +334,7 @@ namespace WallHavenGui.Pages
                 {
                     folider = await folider.CreateFolderAsync("DownloadImage");//创建文件夹
                 }
-                string stringresult = await dl.SaveImage(MyWallpaper.WallpaperUrl, folider, file);
+                string stringresult = await Downloads.SaveImage(MyWallpaper.WallpaperUrl, folider, file);
                 if (!(stringresult == "下载成功"))
                 {
                     UserProfilePersonalizationSettings setting = UserProfilePersonalizationSettings.Current;

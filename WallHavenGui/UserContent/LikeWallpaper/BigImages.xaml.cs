@@ -48,7 +48,7 @@ namespace WallHavenGui.UserContent.LikeWallpaper
             maxpage = !string.IsNullOrWhiteSpace(txt) ? int.Parse(txt) : 24;
             oldpage = maxpage;
             ApiKey = home.SettingGetConfig(AppSettingArgs.OpenKey) == "" ? "" : home.SettingGetConfig(AppSettingArgs.OpenKey);
-            OpenKey = string.IsNullOrWhiteSpace(ApiKey) ? false : true;
+            OpenKey = System.Convert.ToBoolean(home.SettingGetConfig(AppSettingArgs.Is18));
             if (await file.FileExites() == true)
             {
                 MenuList =  await wallxml.GetBigImage();
@@ -63,7 +63,7 @@ namespace WallHavenGui.UserContent.LikeWallpaper
             MyContent.ItemsSource = ContentSource;
             BigClass arg =  args.SelectedItem as BigClass;
 
-            if (MenuText != arg.Name)
+            if (arg != null&&MenuText != arg.Name )
             {
                 nowpage = 0;maxpage = oldpage;
             }
@@ -209,6 +209,11 @@ namespace WallHavenGui.UserContent.LikeWallpaper
             content.Dialog = dialog;
             dialog.Content = content;
             var result = await dialog.ShowAsync();
+            if (await file.FileExites() == true)
+            {
+                MenuList = await wallxml.GetBigImage();
+                Navtation.MenuItemsSource = MenuList;
+            }
         }
     }
 }

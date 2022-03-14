@@ -42,12 +42,19 @@
                                VerticalAlignment="Center" FontWeight="Bold"
                                FontSize="18"
                                Margin="0 15 0 0"/>
-                    <HyperlinkButton 
+                    <StackPanel Orientation="Horizontal">
+                        <HyperlinkButton 
                         Margin="10"
                         HorizontalAlignment="Center" 
                         Content="点此进入网站页"
                         FontSize="17"
                         Click="HyperlinkButton_Click"/>
+                        <HyperlinkButton
+                            Margin="10"
+                            Content="GitHub"
+                            NavigateUri="https://github.com/123456fsdaf/WallHavenGuI"
+                            FontSize="17"/>
+                    </StackPanel>
                 </StackPanel>
             </Border>
         </Grid>

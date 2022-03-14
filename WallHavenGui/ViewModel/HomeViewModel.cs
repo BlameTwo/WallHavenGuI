@@ -78,7 +78,8 @@ namespace WallEventGUI.ViewModel
                     break;
             }
             ApiKey = home.SettingGetConfig(AppSettingArgs.OpenKey)==""?"":home.SettingGetConfig(AppSettingArgs.OpenKey);
-            OpenKey =string.IsNullOrWhiteSpace(ApiKey)?false:true;
+            //OpenKey =string.IsNullOrWhiteSpace(ApiKey)?false:true;
+            OpenKey = System.Convert.ToBoolean(home.SettingGetConfig(AppSettingArgs.Is18));
             tools.OpenKey = this.OpenKey;
             tools.Key = this.ApiKey;
             PruityString = home.SettingGetConfig(AppSettingArgs.HomePurityString) == null ? "100": home.SettingGetConfig(AppSettingArgs.HomePurityString);

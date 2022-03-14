@@ -13,8 +13,8 @@
     <UserControl.Resources>
         <convert1:ViewConvert x:Key="ViewConvert"></convert1:ViewConvert>
     </UserControl.Resources>
-    <Grid>
-        <Grid.ContextFlyout>
+    <Border CornerRadius="15">
+        <Border.ContextFlyout>
             <MenuFlyout>
                 <MenuFlyoutItem Text="查看" Click="MenuFlyoutItem_Click"/>
                 <MenuFlyoutSubItem Icon="Download" Text="下载">
@@ -22,7 +22,7 @@
                     <MenuFlyoutItem Text="保存到图片库" x:Name="SavePictureLibary" Click="SavePictureLibary_Click"/>
                 </MenuFlyoutSubItem>
             </MenuFlyout>
-        </Grid.ContextFlyout>
+        </Border.ContextFlyout>
         <Grid>
             <Border
                     Opacity="1"
@@ -98,5 +98,5 @@
             </Grid>
 
         </Grid>
-    </Grid>
+    </Border>
 </UserControl>

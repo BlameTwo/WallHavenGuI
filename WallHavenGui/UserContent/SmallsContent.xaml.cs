@@ -160,5 +160,10 @@ namespace WallHavenGui.UserContent
                 result.dataList = e.NewValue as List<Wallpaper>;
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Dialog.Hide();
+        }
     }
 }

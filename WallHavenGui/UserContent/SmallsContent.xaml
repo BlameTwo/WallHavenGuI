@@ -6,15 +6,24 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:data="using:WallHavenGui.Model"
     mc:Ignorable="d">
-    <ListBox
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <ListBox
         x:Name="DataList"
         SelectionChanged="ListBox_SelectionChanged">
-        <ListBox.ItemTemplate>
-            <DataTemplate x:Name="SmallDataTemplate" x:DataType="data:BigClass">
-                <Grid Padding="5">
-                    <TextBlock Text="{x:Bind Name}"/>
-                </Grid>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-    </ListBox>
+            <ListBox.ItemTemplate>
+                <DataTemplate x:Name="SmallDataTemplate" x:DataType="data:BigClass">
+                    <Grid Padding="5">
+                        <TextBlock Text="{x:Bind Name}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Margin="0 10" Content="关闭" Style="{ThemeResource AccentButtonStyle}"
+                Grid.Row="1"
+                Height="50" Width="80" HorizontalAlignment="Center" Click="Button_Click"/>
+    </Grid>
 </UserControl>

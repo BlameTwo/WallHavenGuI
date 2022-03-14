@@ -61,9 +61,13 @@ namespace WallHavenGui.UserContent
 
         private static void back(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
-
+            
         }
 
-        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            
+            IsShow = true;
+        }
     }
 }

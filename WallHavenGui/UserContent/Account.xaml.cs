@@ -31,14 +31,14 @@ namespace WallHavenGui.UserContent
         WallHevenSettingResource home = new WallHevenSettingResource();
         private void MyExpander_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            KeyText.Width = this.ActualWidth - 250;
+            KeyText.Width = this.ActualWidth - 300;
         }
-
+        int clickcount = 0;
+        ContentDialog dialog = new ContentDialog();
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            
+            SaveKey.IsEnabled = false;
             var result = await home.KeyExists(KeyText.Password);
-            ContentDialog dialog = new ContentDialog();
             dialog.PrimaryButtonText = "了解";
             if (result == false)
             {
@@ -47,24 +47,48 @@ namespace WallHavenGui.UserContent
                 dialog.Content = textBlock;
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 await dialog.ShowAsync();
-                
                 return;
             }
             else
             {
                 home.SettingSetConfig(AppSettingArgs.OpenKey, KeyText.Password);
+                home.SettingSetConfig(AppSettingArgs.Is18, false.ToString());
                 dialog.Title = "保存成功！";
                 TextBlock textBlock = new TextBlock() { Text = "这意味这您的身份从访客升级至用户！" };
                 dialog.Content = textBlock;
                 dialog.DefaultButton = ContentDialogButton.Primary;
                 await dialog.ShowAsync();
-               
+                if (clickcount >= 3)
+                {
+                    clickcount = 0;
+                    Open18.Visibility = Visibility.Visible;
+                }
+                clickcount++;
             }
+            SaveKey.IsEnabled = true;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             home.DeleteKey(AppSettingArgs.OpenKey);
+        }
+
+
+        private async void Open18_Click(object sender, RoutedEventArgs e)
+        {
+            if (!System.Convert.ToBoolean(home.SettingGetConfig(AppSettingArgs.Key18)))
+            {
+                ContentDialog opendialog = new ContentDialog();
+                Open open = new Open();
+                
+                open.Dialog = opendialog;
+                opendialog.Content = open;
+                await opendialog.ShowAsync();
+            }
+            else
+            {
+
+            }
         }
     }
 }
