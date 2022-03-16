@@ -46,14 +46,18 @@ namespace WallHavenGui.ViewModel
 
         private async void createbieimage()
         {
-            if(!string.IsNullOrWhiteSpace(BigName))
+            WallFile file = new WallFile();        
+            if (await file.FileExites())
             {
-                if(!await wallxml.BigExits(BigName))
+                if (!string.IsNullOrWhiteSpace(BigName))
                 {
-                    await wallxml.CreateSmalls(BigName);
-                    Window.IsShow = true;
+                    if (!await wallxml.BigExits(BigName))
+                    {
+                        await wallxml.CreateSmalls(BigName);
+                        Window.IsShow = true;
+                    }
+                    Window.Dialog.Title = "已存在该收藏夹";
                 }
-                Window.Dialog.Title = "已存在该收藏夹";
             }
         }
         public RelayCommand CreateBigImage { get; set; }

@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -31,6 +31,8 @@ using static WallEventGUI.Model.UIModel;
 using Windows.ApplicationModel.Core;
 using Windows.UI.ViewManagement;
 using WallHavenGui.UserContent;
+using System.Net;
+using Windows.Web.Http;
 
 // https://go.microsoft.com/fwlink/?LinkId=234238 上介绍了“空白页”项模板
 
@@ -43,17 +45,19 @@ namespace WallHavenGui.Pages
     {
 
         string full, file;
-
         public WallpaperPage()
         {
             this.InitializeComponent();
 
         }
+
         Wallpaper MyWallpaper { get; set; }
         string ApiKey { get; set; }
         bool OpenKey { get; set; }
 
         Downloads dl = new Downloads();
+        private bool isDownloading;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Window.Current.SetTitleBar(AppBar);
@@ -75,6 +79,7 @@ namespace WallHavenGui.Pages
             BackButton.Click-=Button_Click;
         }
 
+        WallFile wallfile = new WallFile();
         private async void Page_Loaded(object sender, RoutedEventArgs e)
         {
             WallHevenSettingResource home = new WallHevenSettingResource();
@@ -88,13 +93,14 @@ namespace WallHavenGui.Pages
             {
                 Init(home);
             }
-
             WallXml xml = new WallXml();
-            if (await xml.SmallExits(MyWallpaper.id, "Default"))
+            if(await wallfile.FileExites())
             {
-                DefaultName.IsEnabled = false;
+                if (await xml.SmallExits(MyWallpaper.id, "Default"))
+                {
+                    DefaultName.IsEnabled = false;
+                }
             }
-
         }
 
         void Init(WallHevenSettingResource home)

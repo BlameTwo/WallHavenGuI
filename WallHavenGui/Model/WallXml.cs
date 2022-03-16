@@ -77,19 +77,12 @@ namespace WallHavenGui.Model
             foreach (var item in id)
             {
                 WallXml wallxml = new WallXml();
-                if (await wallxml.SmallExits(item.id, Name))
-                {
-                    continue;
-                }
-                else
-                {
-                    var wallpaper = WriteImage(item);     //这里返回的是一个string字符串，也就是处理完毕的XmlElment
-                    XmlDocument xmldoc2 = new XmlDocument();
-                    xmldoc2.LoadXml(wallpaper);
-                    var list = xmldoc2.SelectSingleNode("Wallpaper");
-                    var result = small.OwnerDocument.ImportNode(list, true);
-                    small.AppendChild(result);
-                }
+                var wallpaper = WriteImage(item);     //这里返回的是一个string字符串，也就是处理完毕的XmlElment
+                XmlDocument xmldoc2 = new XmlDocument();
+                xmldoc2.LoadXml(wallpaper);
+                var list = xmldoc2.SelectSingleNode("Wallpaper");
+                var result = small.OwnerDocument.ImportNode(list, true);
+                small.AppendChild(result);
             }
             bigs.AppendChild(small);
             xmldoc.Save(file.Path);
