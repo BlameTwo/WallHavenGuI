@@ -188,22 +188,17 @@
                         <RowDefinition/>
                     </Grid.RowDefinitions>
 
-                    <ScrollViewer
-                        Grid.RowSpan="1" Margin="10 0" Grid.Row="1" ZoomMode="Enabled" 
-                              Grid.Column="0"
-                              DoubleTapped="WallpaperScroll_DoubleTapped"
-                              x:Name="WallpaperScroll"
-                              MinZoomFactor="1">
-                        <Grid>
-                            <musx:ProgressRing 
+
+                    <Grid Grid.Row="1">
+                        <musx:ProgressRing 
                                 IsActive="True" 
                                 Height="80"
                                 x:Name="RingPro"
                                 Width="80"></musx:ProgressRing>
-                            <Image x:Name="Wallpaper"
-                                   Grid.Column="0"  Stretch="Uniform"/>
-                        </Grid>
-                    </ScrollViewer>
+                        <Image x:Name="Wallpaper"
+                                   Grid.Column="0"  Stretch="Uniform"
+                                   MaxHeight="500" MaxWidth="1000"/>
+                    </Grid>
                     <Border CornerRadius="10"
                             Padding="10"
                             HorizontalAlignment="Center" Margin="10 0">
@@ -228,7 +223,8 @@
                                 Margin="10 0 0 0"
                             VerticalAlignment="Center" 
                             Foreground="{ThemeResource AppBarItemForegroundThemeBrush}"
-                            Text="{x:Bind WallpaperScroll.ZoomFactor,Converter={StaticResource FactorConvert},Mode=OneWay}"/>
+                            />
+                                <!--Text="{x:Bind WallpaperScroll.ZoomFactor,Converter={StaticResource FactorConvert},Mode=OneWay}"-->
                             </StackPanel>
                         </Grid>
                     </Border>

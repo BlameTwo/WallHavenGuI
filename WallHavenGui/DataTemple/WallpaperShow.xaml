@@ -21,6 +21,10 @@
                     <MenuFlyoutItem Text="选择路径保存" x:Name="SavePath" Click="SavePath_Click"/>
                     <MenuFlyoutItem Text="保存到图片库" x:Name="SavePictureLibary" Click="SavePictureLibary_Click"/>
                 </MenuFlyoutSubItem>
+                <MenuFlyoutSeparator/>
+                <MenuFlyoutSubItem Icon="Like" Text="收藏" x:Name="LikeMenu">
+                    <MenuFlyoutItem Text="添加到默认收藏夹" x:Name="DefaultLike" Click="DefaultLike_Click"/>
+                </MenuFlyoutSubItem>
             </MenuFlyout>
         </Border.ContextFlyout>
         <Grid>

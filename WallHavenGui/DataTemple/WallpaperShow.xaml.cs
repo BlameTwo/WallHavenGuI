@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.Toolkit.Mvvm.Input;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -29,8 +31,43 @@ namespace WallHavenGui.DataTemple
         public WallpaperShow()
         {
             this.InitializeComponent();
+            this.Loaded += WallpaperShow_Loaded;
+            LikeCommand = new List<RelayCommand<string>>();
         }
 
+        private async void WallpaperShow_Loaded(object sender, RoutedEventArgs e)
+        {
+            WallFile wallfile = new WallFile();
+            if (await wallfile.FileExites() && LikeCommand.Count== 0)           //防止重复添加
+            {
+                WallXml xml = new WallXml();        //没有本地收藏会报错
+                items = await xml.GetBigImage();
+                List<MenuFlyoutItem> list = new List<MenuFlyoutItem>();
+                if(items == null)
+                    return;
+                foreach (var i in items)
+                {
+                    if (i.Name == "Default")
+                        continue;
+                    MenuFlyoutItem item = new MenuFlyoutItem();
+                    item.Text = i.Name;
+                    RelayCommand<string> relays;
+                    relays = new RelayCommand<string>(se =>
+                    {
+                        xml.AddImageedId(new List<Wallpaper>() { MyData }, i.Name);
+                    });
+                    LikeCommand.Add(relays);            //把命令加入到集合中
+                    item.Command = relays;          //设置命令
+                    item.CommandParameter = i.Name;             //设置附带参数
+                    list.Add(item);
+                    LikeMenu.Items.Add(item);
+                }
+            }
+        }
+
+        List<RelayCommand<string> >LikeCommand { get; set; }
+
+        ObservableCollection<BigClass> items = new ObservableCollection<BigClass>();
         
 
         public Wallpaper MyData
@@ -75,6 +112,11 @@ namespace WallHavenGui.DataTemple
         {
             Frame rootframe = Window.Current.Content as Frame;
             rootframe.Navigate(typeof(WallpaperPage), MyData, new DrillInNavigationTransitionInfo());
+        }
+
+        private void DefaultLike_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

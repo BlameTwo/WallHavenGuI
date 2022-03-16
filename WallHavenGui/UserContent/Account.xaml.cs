@@ -90,5 +90,12 @@ namespace WallHavenGui.UserContent
 
             }
         }
+
+        private async void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            WallHavenGui.Account.Model.Account account = new WallHavenGui.Account.Model.Account();
+            var value =  await account.Login("ZYF8899", "qwe262953");
+
+        }
     }
 }
