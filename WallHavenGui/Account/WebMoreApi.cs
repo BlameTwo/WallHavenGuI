@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using WallHavenGui.Account.Model;
+using static WallHavenGui.Account.Model.UserModel;
 
 namespace WallHavenGui.Account
 {
@@ -19,22 +21,14 @@ namespace WallHavenGui.Account
         /// <returns></returns>
         public async Task<ResultUserModel> GetUserItem(string username)
         {
-            if (AccountArgs.NowCookie == null)
-                return null;
-            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create($"https://wallhaven.cc/user/{username}");              //创建请求类
-            req.CookieContainer = AccountArgs.NowCookie;
-            req.Method = "GET";
-            req.ContentType = "text/html; charset=UTF-8";
-            req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39";
-            req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
-            var request = await req.GetResponseAsync();
-            var stream = request.GetResponseStream();
             HtmlDocument htmldoc = new HtmlDocument();
-            htmldoc.Load(stream);
+            htmldoc.LoadHtml(await GetHtml($"https://wallhaven.cc/user/{username}"));
             ResultUserModel model = new ResultUserModel();
             model.UserName = username;
             var leftnode = htmldoc.DocumentNode.SelectSingleNode("//section[@id='profile-content']//div[@class='user-info-left']");
             var artical = leftnode.SelectSingleNode("./div[1]//article");
+            model.UserImage = htmldoc.DocumentNode.SelectSingleNode("//main[@id='main']//header/div/a/img").Attributes["src"].Value;
+
             #region 拿到个性标签
             //拿到个性标签
             if (artical != null) 
@@ -48,7 +42,7 @@ namespace WallHavenGui.Account
             
             var section_replies = leftnode.SelectSingleNode("//section[@id='comments']");            //这个是回复列表
 
-            if (sections != null || sections.Count>0)          
+            if (sections != null)          
             {
                 ObservableCollection< UserComment > comments = new ObservableCollection< UserComment >();
                 foreach (var article in sections)
@@ -76,8 +70,6 @@ namespace WallHavenGui.Account
             }
             #endregion
 
-
-
             #region 详细时间信息
             var noderight = htmldoc.DocumentNode.SelectSingleNode("//section[@id='profile-content']//div[@class='user-info-right']//div[@class='profile-box']");       //
             var first = noderight.SelectSingleNode("./dl[1]");
@@ -89,6 +81,51 @@ namespace WallHavenGui.Account
             #endregion
 
             return model;
+        }
+
+
+
+
+        public async  Task<string> GetHtml(string url)
+        {
+            if (AccountArgs.NowCookie == null)
+                return null;
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create(url);              //创建请求类
+            req.CookieContainer = AccountArgs.NowCookie;
+            req.Method = "GET";
+            req.ContentType = "text/html; charset=UTF-8";
+            req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39";
+            req.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+            var request = await req.GetResponseAsync();
+            var stream = request.GetResponseStream();
+            StreamReader st = new StreamReader(stream);
+            return st.ReadToEnd();
+        }
+        
+
+
+        public async Task<ObservableCollection< MyCommections>> GetMyCommectionsAsync()
+        {
+            var myCommections = new ObservableCollection< MyCommections>();
+            HtmlDocument htmldoc = new HtmlDocument();
+            htmldoc.LoadHtml(await GetHtml("https://wallhaven.cc/favorites/"));
+            var aside = htmldoc.DocumentNode.SelectSingleNode("//aside[@data-storage-id='favorites']");
+            var div = aside.SelectSingleNode(".//div");
+            var div1 = div.SelectSingleNode("./div[@class='sidebar-content']");
+            var ul = div1.SelectSingleNode(".//ul");
+            var lis = ul.SelectNodes("./li");
+            foreach (var item in lis)
+            {
+                if (item.Attributes["class"].Value == "trash")          //这个是垃圾桶
+                    continue;
+                MyCommections model = new MyCommections();
+                var a = item.SelectSingleNode(".//a[@class='label']");
+                model.Name = a.InnerText.Replace(a.SelectSingleNode(".//small").InnerText,"");
+                model.ImageCount = a.SelectSingleNode(".//small").InnerText;
+                model.Url = item.SelectSingleNode(".//a").Attributes["href"].Value;
+                myCommections.Add(model);
+            }
+            return myCommections;
         }
 
 

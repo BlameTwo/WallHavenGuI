@@ -249,7 +249,7 @@ namespace WallEventGUI.WallHavenTools
 
 
     /// <summary>
-    /// https://wallhaven.cc/api/v1/collections?apikey=??       https://wallhaven.cc/api/v1/collections/用户名，必须是用户公开集合。
+    /// https://wallhaven.cc/api/v1/collections?apikey=??       https://wallhaven.cc/api/v1/collections/用户名，必须是用户公开集合……挺无语的
     /// </summary>
     public class UserList
     {
@@ -259,4 +259,8 @@ namespace WallEventGUI.WallHavenTools
         public string _public { get; set; }
         public string count { get; set; }
     }
+
+
+
+    
 }

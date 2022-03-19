@@ -453,7 +453,6 @@ namespace WallEventGUI.WallHavenTools
 
 
 
-
         thumbs GetThumbs(JObject jo)
         {
             thumbs th = new thumbs();

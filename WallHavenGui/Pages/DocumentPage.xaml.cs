@@ -37,23 +37,17 @@ namespace WallHavenGui.Pages
         private async void DocumentPage_Loaded(object sender, RoutedEventArgs e)
         {
             string login2 = home.SettingGetConfig(AppSettingArgs.UserLogin);
-            if (login2 == null)
+            if (login2 == null ||string.IsNullOrWhiteSpace(login2))
             {
                ContentDialog content = new ContentDialog();
                Login login = new Login();
                login.Dialog = content;
                content.Content = login;
                content.CloseButtonText = "关闭";
-               content.PrimaryButtonText = "注册";
-               content.PrimaryButtonClick += Content_PrimaryButtonClick;
                var a = await content.ShowAsync();
             }
-            MyUser.Show();          //刷新控件中的数据
-        }
-
-        private async  void Content_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
-        {
-            await Launcher.LaunchUriAsync(new Uri("https://wallhaven.cc/join"));
+            if(!string.IsNullOrWhiteSpace(home.SettingGetConfig(AppSettingArgs.UserLogin)))
+                await MyUser.Show();          //刷新控件中的数据
         }
     }
 }

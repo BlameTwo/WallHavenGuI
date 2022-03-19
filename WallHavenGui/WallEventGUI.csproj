@@ -131,6 +131,7 @@
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
     <Compile Include="Account\Model\LoginModel.cs" />
+    <Compile Include="Account\Model\UserModel.cs" />
     <Compile Include="Account\WebMoreApi.cs" />
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>

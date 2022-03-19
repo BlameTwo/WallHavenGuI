@@ -4,12 +4,97 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WallHavenGui.AccountUserControl"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
+    xmlns:data="using:WallHavenGui.Account.Model"
     d:DesignHeight="300"
     d:DesignWidth="400">
 
     <Grid>
-        <TextBlock x:Name="Tip"/>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="7*"/>
+        </Grid.ColumnDefinitions>
+        <muxc:ProgressBar
+            Grid.RowSpan="2"
+            Grid.ColumnSpan="2"
+            VerticalAlignment="Top"
+            x:Name="Pro" IsIndeterminate="True" ShowPaused="False" ShowError="False" />
+        <Border Margin="5" CornerRadius="10" >
+            <Grid>
+                <Border Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                        CornerRadius="10"
+                        Margin="5" Opacity="0.3"/>
+                <StackPanel Margin="10 25 10 10" VerticalAlignment="Center" >
+                    
+                    <Ellipse Width="80" Height="80" 
+                             Margin="20 20 20 5"
+                           HorizontalAlignment="Center" VerticalAlignment="Center" >
+                        <Ellipse.Fill>
+                            <ImageBrush Stretch="Fill" 
+                                    x:Name="UserImage"
+                                        ></ImageBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <TextBlock x:Name="NameLabel"
+                               HorizontalAlignment="Center"
+                               FontSize="15"
+                               Margin="0 0 0 15"
+                               FontWeight="Bold"/>
+                    <TextBlock x:Name="LabelTip"
+                               HorizontalAlignment="Center" 
+                               />
+                    
+                    <TextBlock x:Name="LastTimeTip" TextWrapping="Wrap" HorizontalAlignment="Center" >
+                        <Run Text="在："/>
+                        <Run x:Name="LastLabel"/>
+                        <Run Text="前登录"/>
+                    </TextBlock>
+                    <Button Margin="0 15 0 0" Content="退出登录"
+                            HorizontalAlignment="Center" 
+                            x:Name="GoOut"
+                            Style="{ThemeResource  AccentButtonStyle}"
+                            Click="Button_Click"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Border CornerRadius="10" Margin="5" Background="{ThemeResource AppBarBackgroundThemeBrush}" 
+                        Opacity="0.3" Grid.RowSpan="2"/>
+            <Button Click="Button_Click_1"
+                    Margin="0 15 0 0"
+                    
+                    Style="{ThemeResource AccentButtonStyle}"
+                    Content="刷新收藏" HorizontalAlignment="Center" />
+            <ListView Margin="15" CornerRadius="10"
+                  Grid.Row="1"
+                  x:Name="MyLikes">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="data:MyCommections" x:Name="MyText">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Text="{x:Bind Name}"
+                                   ToolTipService.ToolTip="{x:Bind Url}"
+                                   HorizontalAlignment="Left"
+                                   />
+                            <muxc:InfoBadge Grid.Column="1" HorizontalAlignment="Right" Value="{x:Bind ImageCount}"/>
+                        </Grid>
+                        
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </UserControl>

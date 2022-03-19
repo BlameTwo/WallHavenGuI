@@ -8,46 +8,47 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using WallEventGUI.Model;
+using Windows.Security.Credentials;
 
 namespace WallHavenGui.Account.Model
 {
     public static class AccountArgs
     {
         public static CookieContainer NowCookie { get; set; }
+        public static string Password { get; set; }
     }
 
     public class Account
     {
 
+
+        WallHevenSettingResource home = new WallHevenSettingResource();
         /// <summary>
         /// 退出登录，请务必等待此方法
         /// </summary>
         /// <exception cref="NotImplementedException"></exception>
         public async Task Loginout()
         {
-            await Task.Run(async () =>
-            {
-                if (AccountArgs.NowCookie == null)
-                {
-                    throw new NotImplementedException("无账号信息");
-                }
-                else
-                {
-                    var result = await GetPost(Model.GetType.OutLogin, null);
-                    Dictionary<string, string> parameters = new Dictionary<string, string>();
-                    //ZYFfsdfa
-                    parameters.Add("_token", result.Token);
-                    byte[] postData = Encoding.UTF8.GetBytes(BuildQuery(parameters, "utf8"));   //使用utf-8格式组装post参数
-                    HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("https://wallhaven.cc/auth/logout");              //创建请求类
-                    req.Method = "POST";
-                    req.ContentType = "application/x-www-form-urlencoded";
-                    req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39";
-                    HttpWebResponse respinse = (HttpWebResponse)req.GetResponse();
-                    Stream st = respinse.GetResponseStream();
-                    StreamReader reader = new StreamReader(st);
-                    AccountArgs.NowCookie = null;
-                }
-            });
+            var result = await GetPost(Model.GetType.OutLogin, null);
+            Dictionary<string, string> parameters = new Dictionary<string, string>();
+            parameters.Add("_token", result.Token);
+            byte[] postData = Encoding.UTF8.GetBytes(BuildQuery(parameters, "utf8"));   //使用utf-8格式组装post参数
+            HttpWebRequest req = (HttpWebRequest)HttpWebRequest.Create("https://wallhaven.cc/auth/logout");              //创建请求类
+            req.Method = "POST";
+            req.ContentType = "application/x-www-form-urlencoded";
+            req.UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.51 Safari/537.36 Edg/99.0.1150.39";
+            HttpWebResponse respinse = (HttpWebResponse)req.GetResponse();
+            Stream st = respinse.GetResponseStream();
+            StreamReader reader = new StreamReader(st);
+            AccountArgs.NowCookie = null;
+            var vault = new PasswordVault();
+            var list = vault.FindAllByResource(AppSettingArgs.AppName);
+            var credential = vault.Retrieve(AppSettingArgs.AppName, home.SettingGetConfig(AppSettingArgs.UserLogin));
+            var password = credential.Password;
+            vault.Remove(new Windows.Security.Credentials.PasswordCredential(AppSettingArgs.AppName, home.SettingGetConfig(AppSettingArgs.UserLogin), password));
+            home.SettingSetConfig(AppSettingArgs.OpenKey, "");
+            home.SettingSetConfig(AppSettingArgs.UserLogin, "");
         }
 
         /// <summary>
@@ -87,6 +88,7 @@ namespace WallHavenGui.Account.Model
 
                 var coo = wr.Headers.GetValues("Set-Cookie").ToList();              //获得登陆后cookie，这和登录前cookie不一样的！并且登陆后cookie可以干很多事情！
                 AccountArgs.NowCookie = GetDIct(coo);
+                
                 System.IO.StreamReader reader = new System.IO.StreamReader(respStream, System.Text.Encoding.GetEncoding("utf-8"));          //编码序列
                 string t = reader.ReadToEnd();          //获得登陆后得节过页面，然后进行判断
 
@@ -273,6 +275,9 @@ namespace WallHavenGui.Account.Model
         /// 上传数量
         /// </summary>
         public string UpdataCount { get; set; }
+
+        public string UserImage { get; set; }
+
 
         /// <summary>
         /// 收藏夹数量

@@ -60,9 +60,9 @@ namespace WallHavenGui.AccountUserControl
             }
             TipText.Text = "登录成功";
             var vault = new PasswordVault();
-            vault.Add(new PasswordCredential(AppSettingArgs.AppName, username.Text, password.Password));
+            vault.Add(new PasswordCredential(AppSettingArgs.AppName, result.UserName, password.Password));          //资源，用户名，密码
             home.SettingSetConfig(AppSettingArgs.OpenKey, result.UserKey);          //保存密钥
-            home.SettingSetConfig(AppSettingArgs.UserLogin, username.Text);             //保存账号
+            home.SettingSetConfig(AppSettingArgs.UserLogin, result.UserName);             //保存账号
             Pro.IsIndeterminate = false;
             
             Dialog.Hide();
