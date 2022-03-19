@@ -48,9 +48,9 @@
                 </musx:NavigationViewItem>
                 <musx:NavigationViewItem Content="首页" x:Name="HomeSml" Icon="Home" Tag="Home"></musx:NavigationViewItem>
                 <musx:NavigationViewItem Content="喜欢" x:Name="LikesPage" Icon="like" Tag="NewSetting"/>
-                <musx:NavigationViewItem Content="本地" x:Name="DocumentPage" Icon="Document" Tag="TopList">
+                <musx:NavigationViewItem Content="账户" x:Name="DocumentPage" Icon="People" Tag="TopList">
                     <ToolTipService.ToolTip>
-                        <ToolTip Content="本地(只包含图片库和缓存文件中壁纸)"></ToolTip>
+                        <ToolTip Content="在这里可以查看你的账户"></ToolTip>
                     </ToolTipService.ToolTip>
                 </musx:NavigationViewItem>
             </musx:NavigationView.MenuItems>

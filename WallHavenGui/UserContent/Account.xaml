@@ -1,4 +1,4 @@
-﻿<musx:Expander
+﻿<UserControl
     xmlns:musx="using:Microsoft.UI.Xaml.Controls"
     x:Class="WallHavenGui.UserContent.Account"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -7,23 +7,16 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    IsExpanded="True"
     x:Name="MyExpander"
-    SizeChanged="MyExpander_SizeChanged"
     
     Style="{ThemeResource PivotTitleContentControlStyle}">
-    
-    <musx:Expander.Header>
-        <TextBlock Text="用户" VerticalAlignment="Center"  />
-    </musx:Expander.Header>
-    <musx:Expander.Content>
 
-        <RelativePanel>
-            <PasswordBox x:Name="KeyText" AutomationProperties.Name="Simple PasswordBox"/>
-            <Button Content="登录" Click="Button_Click_2" Margin="10 0 0 0"/>
-            <Button x:Name="Open18" Margin="10 0 0 0" Content="18+" Width="80" RelativePanel.RightOf="KeyText" Visibility="Collapsed" Click="Open18_Click"/>
-            <Button RelativePanel.RightOf="Open18" x:Name="SaveKey" Click="Button_Click" Margin="10 0 0 0" Content="保存并验证"/>
-            <Button RelativePanel.RightOf="SaveKey" Click="Button_Click_1" Margin="10 0 0 0" Content="删除Key"/>
-        </RelativePanel>
-    </musx:Expander.Content>
-</musx:Expander>
+    <RelativePanel>
+        <!--<PasswordBox x:Name="KeyText" AutomationProperties.Name="Simple PasswordBox"/>
+        <Button Content="登录" Click="Button_Click_2" Margin="10 0 0 0"/>
+        <Button x:Name="Open18" Margin="10 0 0 0" Content="18+" Width="80" RelativePanel.RightOf="KeyText" Visibility="Collapsed" Click="Open18_Click"/>
+        <Button RelativePanel.RightOf="Open18" x:Name="SaveKey" Click="Button_Click" Margin="10 0 0 0" Content="保存并验证"/>
+        <Button RelativePanel.RightOf="SaveKey" Click="Button_Click_1" Margin="10 0 0 0" Content="删除Key"/>-->
+        
+    </RelativePanel>
+</UserControl>

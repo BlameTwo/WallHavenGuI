@@ -8,6 +8,10 @@ namespace WallEventGUI.Model
 {
     public static class AppSettingArgs
     {
+
+        public readonly static string AppName = "WallhavelGUI";
+        public readonly static string UserLogin = "UserLogin";
+
         public readonly static string HomeSorting = "HomeSorting";
         public readonly static string HomeOrderBy = "HomeOrderBy";
         public readonly static string HomePurityString = "HomePurityString";

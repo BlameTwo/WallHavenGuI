@@ -28,19 +28,6 @@
                 HorizontalAlignment="Stretch" VerticalAlignment="Top">
 
                 </content:SettingContentSearch>
-                <content:Account
-                    HorizontalContentAlignment="Left"
-                VerticalContentAlignment="Top"
-                Background="Transparent"
-                Margin="5 10"
-                HorizontalAlignment="Stretch" VerticalAlignment="Top">
-
-                </content:Account>
-                <content:SettingContentWallPage
-                    HorizontalContentAlignment="Left"
-                    Margin="5 10"
-                    HorizontalAlignment="Stretch" />
-
                 <content:SettingContentLike
                     HorizontalContentAlignment="Left"
                     Margin="5 10"
