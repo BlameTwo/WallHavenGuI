@@ -118,44 +118,51 @@
                               x:Name="TagGridView"/>
                         </musx:Expander>
 
-                        <musx:Expander HorizontalAlignment="Center"  Grid.Row="3" Header="用户" Width="400">
-                            <Border Grid.Row="3" Margin="10" CornerRadius="10" Padding="10">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                        <RowDefinition Height="auto"/>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition  Width="auto"/>
-                                        <ColumnDefinition/>
-                                    </Grid.ColumnDefinitions>
-                                    <TextBlock Text="观看人数：" Grid.Row="1"/>
-                                    <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
-                                        <Ellipse Height="60" Width="60" HorizontalAlignment="Center"  >
-                                            <Ellipse.Fill>
-                                                <ImageBrush x:Name="UserImage" />
-                                            </Ellipse.Fill>
-                                        </Ellipse>
-                                        <HyperlinkButton x:Name="UserName" 
+                        <Grid
+                            HorizontalAlignment="Center" 
+                            VerticalAlignment="Center" 
+                            Grid.Row="3" Margin="10" CornerRadius="10" >
+                            <Border
+                                    Opacity="0.1"
+                                    Grid.RowSpan="6"
+                                    Grid.ColumnSpan="2"
+                                    Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                                    />
+                            <Grid Margin="25">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition  Width="auto"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="观看人数：" Grid.Row="1"/>
+                                <StackPanel Grid.ColumnSpan="2" Orientation="Vertical">
+                                    <Ellipse Height="60" Width="60" HorizontalAlignment="Center"  >
+                                        <Ellipse.Fill>
+                                            <ImageBrush x:Name="UserImage" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <HyperlinkButton x:Name="UserName" 
                                                          Click="UserName_Click"
                                                  HorizontalAlignment="Center" />
-                                    </StackPanel>
-                                    <TextBlock Text="文件大小：" Grid.Row="2"/>
-                                    <TextBlock Text="分类：" Grid.Row="3" x:Name="PurityText" VerticalAlignment="Center" />
-                                    <TextBlock Text="喜欢人数：" Grid.Row="4"/>
-                                    <TextBlock Text="链接：" VerticalAlignment="Center"  Grid.Row="5" />
-                                    <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="13 0 0 0"  x:Name="WallpaperViews"/>
-                                    <TextBlock Grid.Column="1" Grid.Row="2" x:Name="WallpaperSize" Margin="13 0 0 0" HorizontalAlignment="Left" />
-                                    <HyperlinkButton Click="WallpaperPurity_Click" Grid.Column="1" Grid.Row="3" x:Name="WallpaperPurity" HorizontalAlignment="Left" />
-                                    <TextBlock Grid.Column="1" Grid.Row="4" x:Name="Farvorites" Margin="13 0 0 0" HorizontalAlignment="Left" />
-                                    <HyperlinkButton Grid.Column="1" Click="Link_Click" Grid.Row="5" x:Name="Link"  HorizontalAlignment="Left" />
-                                </Grid>
-                            </Border>
-                        </musx:Expander>
+                                </StackPanel>
+                                <TextBlock Text="文件大小：" Grid.Row="2"/>
+                                <TextBlock Text="分类：" Grid.Row="3" x:Name="PurityText" VerticalAlignment="Center" />
+                                <TextBlock Text="喜欢人数：" Grid.Row="4"/>
+                                <TextBlock Text="链接：" VerticalAlignment="Center"  Grid.Row="5" />
+                                <TextBlock Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Margin="13 0 0 0"  x:Name="WallpaperViews"/>
+                                <TextBlock Grid.Column="1" Grid.Row="2" x:Name="WallpaperSize" Margin="13 0 0 0" HorizontalAlignment="Left" />
+                                <HyperlinkButton Click="WallpaperPurity_Click" Grid.Column="1" Grid.Row="3" x:Name="WallpaperPurity" HorizontalAlignment="Left" />
+                                <TextBlock Grid.Column="1" Grid.Row="4" x:Name="Farvorites" Margin="13 0 0 0" HorizontalAlignment="Left" />
+                                <HyperlinkButton Grid.Column="1" Click="Link_Click" Grid.Row="5" x:Name="Link"  HorizontalAlignment="Left" />
+                            </Grid>
+                        </Grid>
                         <StackPanel
                             Margin="0 10 0 0"
                             Orientation="Horizontal"

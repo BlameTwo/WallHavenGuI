@@ -51,6 +51,9 @@ namespace WallHavenGui.Account.Model
             home.SettingSetConfig(AppSettingArgs.UserLogin, "");
         }
 
+
+
+
         /// <summary>
         /// 登录
         /// </summary>
@@ -86,7 +89,7 @@ namespace WallHavenGui.Account.Model
                 reqStream.Close();          //关闭流
                 Stream respStream = wr.GetResponseStream();           //转化为stream流
 
-                var coo = wr.Headers.GetValues("Set-Cookie").ToList();              //获得登陆后cookie，这和登录前cookie不一样的！并且登陆后cookie可以干很多事情！
+                var coo = wr.Headers.GetValues("Set-Cookie").ToList();              //获得登陆后cookie，这和登录前cookie不一样的！并且登陆后cookie可以干很多事情！z
                 AccountArgs.NowCookie = GetDIct(coo);
                 
                 System.IO.StreamReader reader = new System.IO.StreamReader(respStream, System.Text.Encoding.GetEncoding("utf-8"));          //编码序列
@@ -94,7 +97,8 @@ namespace WallHavenGui.Account.Model
 
                 HtmlDocument htmldoc = new HtmlDocument();
                 htmldoc.LoadHtml(t);
-
+                WebMoreApi api = new WebMoreApi();
+                model.Results = await api.GetLoginItem(t);
                 var node5 = htmldoc.DocumentNode.SelectSingleNode("//main//div[@id='notifications']/p").InnerText;
                 if (node5 == "Your username/password combination was incorrect")         //判断登录是否失败
                 {
@@ -106,7 +110,6 @@ namespace WallHavenGui.Account.Model
 
 
                 #region 获取密钥
-                //https://wallhaven.cc/settings/account
                 HttpWebRequest http2 = (HttpWebRequest)HttpWebRequest.Create("https://wallhaven.cc/settings/account");          //发起请求
                 http2.Method = "GET";               //GET方式
                 http2.ContentType = "application/x-www-form-urlencoded";                //请求内容，其实无所谓，可删，包含下面的UserAgent
@@ -251,6 +254,8 @@ namespace WallHavenGui.Account.Model
         public string UserKey { get; set; }
 
         public string emaile { get; set; }
+
+        public ResultUserModel Results { get; set; }
     }
 
 
@@ -293,6 +298,8 @@ namespace WallHavenGui.Account.Model
         /// 别人给你的评论
         /// </summary>
         public ObservableCollection<UserComment> Comments { get; set; }
+
+        public int CommentMaxPage { get; set; }
     }
 
 
@@ -316,7 +323,6 @@ namespace WallHavenGui.Account.Model
         /// </summary>
         public string PicUrl { get; set; }
 
-
         /// <summary>
         /// 评论内容
         /// </summary>
@@ -327,7 +333,6 @@ namespace WallHavenGui.Account.Model
         /// </summary>
         public ObservableCollection<UserComment> comeComment { get; set; }
 
-        
     }
 
 }

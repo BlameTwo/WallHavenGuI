@@ -12,7 +12,6 @@
     xmlns:datatemple="using:WallHavenGui.DataTemple"
     xmlns:convert="using:WallEventGUI.Converter"
     NavigationCacheMode="Required"
-    xmlns:an1="using:Microsoft.Toolkit.Uwp.UI.Animations"
     xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     xmlns:Custom="using:Microsoft.Xaml.Interactivity" xmlns:Custom1="using:Microsoft.Xaml.Interactions.Core" xmlns:animatedvisuals="using:Microsoft.UI.Xaml.Controls.AnimatedVisuals" xmlns:convert1="using:WallHavenGui.Converter"
     mc:Ignorable="d"

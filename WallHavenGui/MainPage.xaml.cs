@@ -96,6 +96,14 @@ namespace WallEventGUI
             {
                 Naviga.SelectedItem = SearchSml;
             }
+            if(MyFrame.SourcePageType == typeof(HelpPage))
+            {
+                Naviga.SelectedItem = HelpPage;
+            }
+            if(MyFrame.SourcePageType == typeof(DocumentPage))
+            {
+                Naviga.SelectedItem = DocumentPage;
+            }
 
         }
 

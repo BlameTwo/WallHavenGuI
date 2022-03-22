@@ -28,6 +28,7 @@ namespace WallEventGUI.ViewModel
             Walls = new Wallpapers();
         }
         ScrollViewer SV = new ScrollViewer();
+
         private void scrool(GridView gv)
         {
             var listview = (VisualTreeHelper.GetChild(gv, 0) as Border).Child as ScrollViewer;

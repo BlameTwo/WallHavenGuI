@@ -8,7 +8,8 @@
     mc:Ignorable="d"
     xmlns:data="using:WallHavenGui.Account.Model"
     d:DesignHeight="300"
-    d:DesignWidth="400">
+    d:DesignWidth="400"
+    Background="Transparent">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +29,7 @@
             <Grid>
                 <Border Background="{ThemeResource AppBarBackgroundThemeBrush}"
                         CornerRadius="10"
-                        Margin="5" Opacity="0.3"/>
+                        Margin="5" Opacity="0.2"/>
                 <StackPanel Margin="10 25 10 10" VerticalAlignment="Center" >
                     
                     <Ellipse Width="80" Height="80" 
@@ -69,15 +70,16 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Border CornerRadius="10" Margin="5" Background="{ThemeResource AppBarBackgroundThemeBrush}" 
-                        Opacity="0.3" Grid.RowSpan="2"/>
+                        Opacity="0.2" Grid.RowSpan="2"/>
             <Button Click="Button_Click_1"
                     Margin="0 15 0 0"
-                    
+                    x:Name="RefLike"
                     Style="{ThemeResource AccentButtonStyle}"
                     Content="刷新收藏" HorizontalAlignment="Center" />
             <ListView Margin="15" CornerRadius="10"
                   Grid.Row="1"
-                  x:Name="MyLikes">
+                  x:Name="MyLikes"
+                      SelectionChanged="MyLikes_SelectionChanged">
                 <ListView.ItemTemplate>
                     <DataTemplate x:DataType="data:MyCommections" x:Name="MyText">
                         <Grid>
@@ -91,10 +93,32 @@
                                    />
                             <muxc:InfoBadge Grid.Column="1" HorizontalAlignment="Right" Value="{x:Bind ImageCount}"/>
                         </Grid>
-                        
+
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </Grid>
+        <muxc:NavigationView
+            PaneDisplayMode="Top"
+            Grid.Column="1"
+            Grid.RowSpan="2"
+            x:Name="Navgite"
+            IsSettingsVisible="False"
+            SelectionChanged="Navgite_SelectionChanged"
+            IsBackButtonVisible="Collapsed">
+            <muxc:NavigationView.MenuItems>
+                <muxc:NavigationViewItem
+                    x:Name="Comment"
+                    Icon="Comment"
+                    Content="评论"/>
+                <muxc:NavigationViewItem
+                    x:Name="Like"
+                    Icon="like"
+                    Content="我的收藏"/>
+            </muxc:NavigationView.MenuItems>
+            <muxc:NavigationView.Content>
+                <Frame x:Name="MyFrame" Navigated="MyFrame_Navigated"/>
+            </muxc:NavigationView.Content>
+        </muxc:NavigationView>
     </Grid>
 </UserControl>

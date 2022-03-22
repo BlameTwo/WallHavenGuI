@@ -17,4 +17,14 @@ namespace WallHavenGui.Account.Model
         public string Name { get; set; }
         public string Url { get; set; }
     }
+
+
+
+    public class LikeWallpaper
+    {
+        public string Id { get; set; }
+        public string PicUrl { get; set; }
+        public string Size { get; set; }
+        public string Like { get; set; }
+    }
 }

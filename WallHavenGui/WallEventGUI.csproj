@@ -25,7 +25,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -130,6 +130,12 @@
     <Compile Include="AccountUserControl\User.xaml.cs">
       <DependentUpon>User.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Account\AccountPage\Comment.xaml.cs">
+      <DependentUpon>Comment.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Account\AccountPage\Like.xaml.cs">
+      <DependentUpon>Like.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Account\Model\LoginModel.cs" />
     <Compile Include="Account\Model\UserModel.cs" />
     <Compile Include="Account\WebMoreApi.cs" />
@@ -140,6 +146,9 @@
     <Compile Include="Converter\ProStateConverter.cs" />
     <Compile Include="Converter\ViewConvert.cs" />
     <Compile Include="ConvertModult\UIConvert.cs" />
+    <Compile Include="DataTemple\UserWallpaperShow.xaml.cs">
+      <DependentUpon>UserWallpaperShow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DataTemple\ViewModels\WallPaperVM.cs" />
     <Compile Include="DataTemple\WallpaperShow.xaml.cs">
       <DependentUpon>WallpaperShow.xaml</DependentUpon>
@@ -209,7 +218,9 @@
       <DependentUpon>SmallsContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserContent\UserContentVM\SearchContentVM.cs" />
+    <Compile Include="ViewModel\CommentVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
+    <Compile Include="ViewModel\UserLikeVM.cs" />
     <Compile Include="ViewModel\XmlViewModel.cs" />
     <Compile Include="WallHavenTools\Model.cs" />
     <Compile Include="WallHavenTools\WallHevenTool.cs" />
@@ -290,6 +301,18 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AccountUserControl\User.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Account\AccountPage\Comment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Account\AccountPage\Like.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataTemple\UserWallpaperShow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

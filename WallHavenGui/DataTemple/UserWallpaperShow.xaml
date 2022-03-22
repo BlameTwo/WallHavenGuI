@@ -1,0 +1,43 @@
+﻿<UserControl
+    x:Class="WallHavenGui.DataTemple.UserWallpaperShow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WallHavenGui.DataTemple"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400">
+
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="1"
+                                    Opacity="0.3"
+                                    Orientation="Horizontal"
+                                    Background="{ThemeResource AppBarBackgroundThemeBrush}"></StackPanel>
+
+        <TextBlock Text="此图片为NSFW，常规状态下不可见！" HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap"/>
+        <Image Grid.RowSpan="2" Source="{x:Bind MyData.PicUrl,Mode=TwoWay}" x:Name="Image" Stretch="UniformToFill"/>
+        <Grid
+                            Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock 
+                x:Name="LikeCount"
+                                    FontSize="15"
+                Text="{x:Bind MyData.Like,Mode=TwoWay}"
+                                    HorizontalAlignment="Left"/>
+            <TextBlock 
+                Text="{x:Bind MyData.Size,Mode=TwoWay}"
+                                Grid.Column="1"
+                                    HorizontalAlignment="Right"
+                                    FontSize="15"
+                x:Name="SizeLabel"/>
+        </Grid>
+    </Grid>
+</UserControl>

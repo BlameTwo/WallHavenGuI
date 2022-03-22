@@ -85,7 +85,7 @@ namespace WallHavenGui.Pages
             WallHevenSettingResource home = new WallHevenSettingResource();
             ApiKey = home.SettingGetConfig(AppSettingArgs.OpenKey) == "" ? "" : home.SettingGetConfig(AppSettingArgs.OpenKey);
             OpenKey =System.Convert.ToBoolean( home.SettingGetConfig(AppSettingArgs.Is18));
-            Tools tools = new Tools() { Key = ApiKey, OpenKey = this.OpenKey };
+            Tools tools = new Tools() { Key = ApiKey, OpenKey = this.OpenKey};
             MyWallpaper = await tools.GetWallpaperAsync(MyWallpaper.id);
             full = MyWallpaper.ImageType == "image/jpeg" ? ".jpg" : ".png";
             file = MyWallpaper.id + full;

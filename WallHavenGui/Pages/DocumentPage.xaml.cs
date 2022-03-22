@@ -9,6 +9,7 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.Credentials;
 using Windows.System;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -30,8 +31,8 @@ namespace WallHavenGui.Pages
         {
             this.InitializeComponent();
             Loaded += DocumentPage_Loaded;
-
         }
+
 
         WallHevenSettingResource home = new WallHevenSettingResource();
         private async void DocumentPage_Loaded(object sender, RoutedEventArgs e)
@@ -49,5 +50,9 @@ namespace WallHavenGui.Pages
             if(!string.IsNullOrWhiteSpace(home.SettingGetConfig(AppSettingArgs.UserLogin)))
                 await MyUser.Show();          //刷新控件中的数据
         }
+
+
+
+        
     }
 }

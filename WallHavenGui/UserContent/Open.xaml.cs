@@ -88,7 +88,7 @@ namespace WallHavenGui.UserContent
                     else
                     {
 
-                        Dialog.Title = "密钥错误！";
+                        Dialog.Title = "打开失败！";
                     }
                 }
                 
