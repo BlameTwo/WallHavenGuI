@@ -9,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using WallHavenGui.Account;
 using WallHavenGui.Account.Model;
+using WallHavenGui.UserContent;
+using Windows.UI.Xaml.Controls;
 
 namespace WallHavenGui.ViewModel
 {
@@ -24,7 +26,7 @@ namespace WallHavenGui.ViewModel
         {
             WebMoreApi api = new WebMoreApi();
             int count = MyComment.Comments.Count;
-            var value = await api.GetMoreComment(nowpage,MyComment.CommentMaxPage,MyComment);
+            var value = await api.GetMoreComment(nowpage, MyComment.CommentMaxPage, MyComment);
             if(value.Count != count)
             {
                 foreach (var item in value)
@@ -43,6 +45,8 @@ namespace WallHavenGui.ViewModel
 
         }
 
+
+
         private ResultUserModel _MyComment;
 
         public ResultUserModel MyComment
@@ -54,5 +58,22 @@ namespace WallHavenGui.ViewModel
         public AsyncRelayCommand MoreData { get; set; }
 
 
+        public  async void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count == 0)
+                return;
+            UserComment comment = (UserComment)e.AddedItems[0];
+            if(comment.comeComment != null)
+            {
+                ContentDialog dialog = new ContentDialog();
+                ComeComment come = new ComeComment();
+                come.Dialog = dialog;
+                come.MyData = comment;
+                dialog.Content = come;
+                await dialog.ShowAsync();
+            }
+            var list = sender as ListView;
+            list.SelectedIndex = -1;
+        }
     }
 }

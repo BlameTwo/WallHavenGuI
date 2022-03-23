@@ -163,6 +163,18 @@
                     <Run Text="随缘"/>
                     </TextBlock>
                 </musx:Expander>
+
+                <musx:Expander Margin="0 10" HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" IsExpanded="True">
+                    <musx:Expander.Header>
+                        <TextBlock Text="关于"
+                               FontWeight="Bold" FontSize="15"/>
+                    </musx:Expander.Header>
+                    <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" >
+                        <Run Text="开发者：怪"/>
+                        <LineBreak/>
+                        <Run Text="Logo绘制：怪"/>
+                    </TextBlock>
+                </musx:Expander>
             </StackPanel>
         </ScrollViewer>
     </Grid>

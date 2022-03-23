@@ -25,12 +25,13 @@
             Grid.ColumnSpan="2"
             VerticalAlignment="Top"
             x:Name="Pro" IsIndeterminate="True" ShowPaused="False" ShowError="False" />
-        <Border Margin="5" CornerRadius="10" >
+        <Border Margin="5" CornerRadius="10">
             <Grid>
-                <Border Background="{ThemeResource AppBarBackgroundThemeBrush}"
+                <Grid
+                        Style="{ThemeResource HandwritingViewCandidatesBarStyle}"
                         CornerRadius="10"
                         Margin="5" Opacity="0.2"/>
-                <StackPanel Margin="10 25 10 10" VerticalAlignment="Center" >
+                <StackPanel Margin="10 25 10 10"  >
                     
                     <Ellipse Width="80" Height="80" 
                              Margin="20 20 20 5"
@@ -57,6 +58,7 @@
                         <Run Text="前登录"/>
                     </TextBlock>
                     <Button Margin="0 15 0 0" Content="退出登录"
+                            VerticalAlignment="Center"
                             HorizontalAlignment="Center" 
                             x:Name="GoOut"
                             Style="{ThemeResource  AccentButtonStyle}"
@@ -69,8 +71,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Border CornerRadius="10" Margin="5" Background="{ThemeResource AppBarBackgroundThemeBrush}" 
-                        Opacity="0.2" Grid.RowSpan="2"/>
+            <Grid CornerRadius="10" Margin="5"
+                  Style="{ThemeResource HandwritingViewCandidatesBarStyle}"
+                        Opacity="0.3"
+                         Grid.RowSpan="2"/>
             <Button Click="Button_Click_1"
                     Margin="0 15 0 0"
                     x:Name="RefLike"

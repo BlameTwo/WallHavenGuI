@@ -34,7 +34,7 @@ namespace WallHavenGui.Account.AccountPage
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            vm.MyComment = e.Parameter as ResultUserModel;
+            vm.MyComment = (e.Parameter as ResultUserModel);
             base.OnNavigatedTo(e);
         }
 

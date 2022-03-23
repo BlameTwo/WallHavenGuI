@@ -35,6 +35,7 @@ namespace WallHavenGui.AccountUserControl
                 GoOut.Content = "登录";
             else
                 GoOut.Content = "退出登录";
+            
         }
         WallHevenSettingResource home = new WallHevenSettingResource();
         ResultUserModel UserModel = new ResultUserModel();

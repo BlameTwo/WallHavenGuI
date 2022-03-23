@@ -193,6 +193,9 @@
     <Compile Include="UserContent\AddBigImage.xaml.cs">
       <DependentUpon>AddBigImage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserContent\ComeComment.xaml.cs">
+      <DependentUpon>ComeComment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserContent\LikeWallpaper\BigImages.xaml.cs">
       <DependentUpon>BigImages.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserContent\AddBigImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserContent\ComeComment.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
