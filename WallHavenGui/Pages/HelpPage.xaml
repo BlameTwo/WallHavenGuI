@@ -173,6 +173,9 @@
                         <Run Text="开发者：怪"/>
                         <LineBreak/>
                         <Run Text="Logo绘制：怪"/>
+                        <LineBreak/>
+                        <Run FontWeight="Bold" Text="开源协议：MIT License"/>
+                        <Run Text=""/>  
                     </TextBlock>
                 </musx:Expander>
             </StackPanel>
