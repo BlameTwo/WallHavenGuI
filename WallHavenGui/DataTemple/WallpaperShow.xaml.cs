@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using static WallHavenGui.Model.Downloads;
 
 //https://go.microsoft.com/fwlink/?LinkId=234236 上介绍了“用户控件”项模板
 
@@ -85,7 +86,6 @@ namespace WallHavenGui.DataTemple
                 new PropertyMetadata(null));
 
 
-        Downloads dl = new Downloads();
 
         private async void SavePath_Click(object sender, RoutedEventArgs e)
         {
@@ -96,16 +96,34 @@ namespace WallHavenGui.DataTemple
             {
                 string nu = MyData.ImageType == "image/jpeg" ? ".jpg" : ".png";
                 string type =$"{MyData.id}{nu}";
-                DownloadTask.AddAsync(Downloads.SaveImage(MyData.WallpaperUrl, folder, type));
+                //DownLoadArgs args = new DownLoadArgs()           此为失败的重构下载代码，功能不足而暂时保留
+                //{
+                //    Url = MyData.WallpaperUrl,
+                //    Path = folder,
+                //    Name = type
+                //};
+                //await Downloads.AddDownload(args);
+                DownloadTip.Title = await Downloads.SaveImage(MyData.WallpaperUrl, folder,type);
+                DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到相关文件夹" : "下载失败了哦！请检查网络。";
+                DownloadTip.IsOpen = true;
             }
         }
 
-        private  void SavePictureLibary_Click(object sender, RoutedEventArgs e)
+        private async  void SavePictureLibary_Click(object sender, RoutedEventArgs e)
         {
             var folder = KnownFolders.PicturesLibrary;
             string nu = MyData.ImageType == "image/jpeg" ? ".jpg" : ".png";
             string type = MyData.id + nu;
-            DownloadTask.AddAsync(Downloads.SaveImage(MyData.WallpaperUrl, folder, type));
+            ////DownLoadArgs args = new DownLoadArgs()
+            ////{
+            ////    Url = MyData.WallpaperUrl,
+            ////    Path = folder,
+            ////    Name = type
+            ////};
+            ////await Downloads.AddDownload(args);
+            DownloadTip.Title = await Downloads.SaveImage(MyData.WallpaperUrl, folder, type);
+            DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到本机图片库中" : "下载失败了哦！请检查网络。";
+            DownloadTip.IsOpen = true;
         }
 
         private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
@@ -118,5 +136,6 @@ namespace WallHavenGui.DataTemple
         {
 
         }
+
     }
 }

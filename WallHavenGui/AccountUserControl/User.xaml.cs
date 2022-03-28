@@ -47,6 +47,7 @@ namespace WallHavenGui.AccountUserControl
         {
             GoOut.IsEnabled = false;
             Pro.IsIndeterminate = true;
+            RefLike.IsEnabled = false;
             var vault = new PasswordVault();
             var list = vault.FindAllByResource(AppSettingArgs.AppName);
             var credential = vault.Retrieve(AppSettingArgs.AppName, home.SettingGetConfig(AppSettingArgs.UserLogin));
@@ -61,6 +62,7 @@ namespace WallHavenGui.AccountUserControl
             NameLabel.Text = UserModel.UserName;
             GoOut.Content = "退出登录";
             Pro.IsIndeterminate = false;
+            RefLike.IsEnabled = true;
         }
 
         void Clear()
@@ -89,7 +91,8 @@ namespace WallHavenGui.AccountUserControl
                 content.Content = login;
                 content.CloseButtonText = "关闭";
                 await content.ShowAsync();
-                GoOut.Content = "登录";
+                if (!string.IsNullOrWhiteSpace(home.SettingGetConfig(AppSettingArgs.UserLogin)))
+                    GoOut.Content = "退出登录";
             }
             else
             {

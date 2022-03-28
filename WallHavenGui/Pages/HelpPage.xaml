@@ -49,6 +49,12 @@
                         Content="点此进入网站页"
                         FontSize="17"
                         Click="HyperlinkButton_Click"/>
+                        <HyperlinkButton 
+                        Margin="10"
+                        HorizontalAlignment="Center" 
+                        NavigateUri="https://space.bilibili.com/108534711"
+                        Content="B站页"
+                        FontSize="17"/>
                         <HyperlinkButton
                             Margin="10"
                             Content="GitHub"
@@ -130,7 +136,7 @@
                                FontWeight="Bold" FontSize="15"/>
                     </musx:Expander.Header>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" >
-                    <Run Text="在启动密钥前，请认真考虑自己是否已满18岁。"/>
+                    <Run Text="此程序中的某些壁纸不适合在一些工作或公共场合观看，尤其是一些露骨的图片，可能会造成一些不必要的麻烦。"/>
                     <LineBreak/>
                     <Run Text="此程序为测试包，一些不正当的内容请酌情观看！"/>
                     </TextBlock>
@@ -142,12 +148,12 @@
                                FontWeight="Bold" FontSize="15"/>
                     </musx:Expander.Header>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" >
-                    <Run Text="此版本为1.0版，是匆匆发布的版本，1.0历时开发了45天，我是首次开发UWP，其中有很多很多的坑，所以时间较长，BUG应该也很多很多，反馈请加QQ:3014085426"/>
+                    <Run Text="此版本为1.3.1版，修复若干bug，优化UI，增加登录一些基础功能"/>
                     </TextBlock>
                 </musx:Expander>
                 <musx:Expander Margin="0 10" HorizontalContentAlignment="Left"  HorizontalAlignment="Stretch" IsExpanded="True">
                     <musx:Expander.Header>
-                        <TextBlock Text="出现紧急情况"
+                        <TextBlock Text="出现知识产权问题以及其他情况"
                                FontWeight="Bold" FontSize="15"/>
                     </musx:Expander.Header>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" >
@@ -160,7 +166,7 @@
                                FontWeight="Bold" FontSize="15"/>
                     </musx:Expander.Header>
                     <TextBlock TextWrapping="Wrap" HorizontalAlignment="Center" >
-                    <Run Text="随缘"/>
+                    <Run Text="目前版本已经稳定（已知BUG修复），除非Wallhaven网站出现大更改，不然不会大更新功能。"/>
                     </TextBlock>
                 </musx:Expander>
 
@@ -175,7 +181,6 @@
                         <Run Text="Logo绘制：怪"/>
                         <LineBreak/>
                         <Run FontWeight="Bold" Text="开源协议：MIT License"/>
-                        <Run Text=""/>  
                     </TextBlock>
                 </musx:Expander>
             </StackPanel>

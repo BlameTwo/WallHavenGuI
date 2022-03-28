@@ -27,6 +27,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="9*"/>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
         <TextBlock Text="{x:Bind vm.PageTitle,Mode=TwoWay}" FontSize="15" Margin="0 0 0 5"/>
         <controls:AdaptiveGridView
@@ -52,7 +53,13 @@
                 </Custom1:EventTriggerBehavior>
             </Custom:Interaction.Behaviors>
             </controls:AdaptiveGridView>
-        <StackPanel Grid.Row="2">
+        <Button 
+            Content="加载更多"
+            HorizontalAlignment="Center"
+            Click="{x:Bind vm.MoreData}"
+            Grid.Row="2" 
+            Style="{ThemeResource AccentButtonStyle}"/>
+        <StackPanel Grid.Row="3">
             <musx:ProgressBar IsIndeterminate="{x:Bind Mode=TwoWay, Path=vm._ProCess}"/>
         </StackPanel>
     </Grid>

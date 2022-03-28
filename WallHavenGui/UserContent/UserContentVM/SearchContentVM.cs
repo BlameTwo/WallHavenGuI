@@ -136,6 +136,12 @@ namespace WallEventGUI.UserContent.ContentVM
             
         }
 
+        public void More()
+        {
+            MoreData();
+        }
+
+
         private Meta meta;
 
         public Meta MyMeta
@@ -147,22 +153,27 @@ namespace WallEventGUI.UserContent.ContentVM
 
         private async void MoreData()
         {
-            SV.ViewChanged -= SV_ViewChanged;
-            _ProState = true;
-            int maxpage = int.Parse(_SearchData.Meta.Last_Page);
-            if (maxpage != 0 || pagesize<maxpage)
+            if (_SearchData.Meta != null)
             {
-                pagesize++;
-                var result = await tools.GetSearchWallpaperString(searchSorting, topRange.D1, _SearchText, "", CatString, PurityString, _Order, pagesize, colors.None);
-                meta = result.Meta;
-                foreach (var item in result.WallpaperList)
+
+                SV.ViewChanged -= SV_ViewChanged;
+                _ProState = true;
+                int maxpage = int.Parse(_SearchData.Meta.Last_Page);
+                if (maxpage != 0 || pagesize < maxpage)
                 {
-                    SearchData.WallpaperList.Add(item);
+                    pagesize++;
+                    var result = await tools.GetSearchWallpaperString(searchSorting, topRange.D1, _SearchText, "", CatString, PurityString, _Order, pagesize, colors.None);
+                    meta = result.Meta;
+                    foreach (var item in result.WallpaperList)
+                    {
+                        SearchData.WallpaperList.Add(item);
+                    }
                 }
+                SearchResultText = $"搜索 {SearchText}关键字，共搜索到{meta.Last_Page}页，已经加载{pagesize}页。";
+                _ProState = false;
+                SV.ViewChanged += SV_ViewChanged;
             }
-            SearchResultText = $"搜索 {SearchText}关键字，共搜索到{meta.Last_Page}页，已经加载{pagesize}页。";
-            _ProState = false;
-            SV.ViewChanged += SV_ViewChanged;
+            
         }
 
 

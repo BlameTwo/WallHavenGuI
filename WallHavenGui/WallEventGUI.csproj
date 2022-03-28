@@ -25,7 +25,7 @@
     <GenerateTestArtifacts>True</GenerateTestArtifacts>
     <AppxBundle>Always</AppxBundle>
     <HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
-    <AppxBundlePlatforms>x64</AppxBundlePlatforms>
+    <AppxBundlePlatforms>x86</AppxBundlePlatforms>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -157,6 +157,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\AppSettingArgs.cs" />
+    <Compile Include="Model\DownloadHelper.cs" />
     <Compile Include="Model\Downloads.cs" />
     <Compile Include="Model\DownloadTask.cs" />
     <Compile Include="Model\FanYiClass.cs" />
@@ -222,6 +223,7 @@
     </Compile>
     <Compile Include="UserContent\UserContentVM\SearchContentVM.cs" />
     <Compile Include="ViewModel\CommentVM.cs" />
+    <Compile Include="ViewModel\DownloadPageVM.cs" />
     <Compile Include="ViewModel\HomeViewModel.cs" />
     <Compile Include="ViewModel\UserLikeVM.cs" />
     <Compile Include="ViewModel\XmlViewModel.cs" />

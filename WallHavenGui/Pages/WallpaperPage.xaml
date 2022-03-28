@@ -196,16 +196,20 @@
                     </Grid.RowDefinitions>
 
 
-                    <Grid Grid.Row="1">
-                        <musx:ProgressRing 
+                    <ScrollViewer Grid.Row="1" ZoomMode="Enabled"
+                                  >
+                        <Grid>
+                            <musx:ProgressRing 
                                 IsActive="True" 
                                 Height="80"
                                 x:Name="RingPro"
                                 Width="80"></musx:ProgressRing>
-                        <Image x:Name="Wallpaper"
-                                   Grid.Column="0"  Stretch="Uniform"
-                                   MaxHeight="500" MaxWidth="1000"/>
-                    </Grid>
+                            <Image x:Name="Wallpaper"
+                                   VerticalAlignment="Center" 
+                                   HorizontalAlignment="Center"
+                                   Grid.Column="0"  Stretch="Uniform"/>
+                        </Grid>
+                    </ScrollViewer>
                     <Border CornerRadius="10"
                             Padding="10"
                             HorizontalAlignment="Center" Margin="10 0">

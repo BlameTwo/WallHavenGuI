@@ -47,12 +47,8 @@ namespace WallHavenGui.Pages
                content.CloseButtonText = "关闭";
                var a = await content.ShowAsync();
             }
-            if(!string.IsNullOrWhiteSpace(home.SettingGetConfig(AppSettingArgs.UserLogin)))
+            if (!string.IsNullOrWhiteSpace(home.SettingGetConfig(AppSettingArgs.UserLogin)))
                 await MyUser.Show();          //刷新控件中的数据
         }
-
-
-
-        
     }
 }

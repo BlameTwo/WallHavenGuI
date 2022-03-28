@@ -48,6 +48,12 @@ namespace WallEventGUI.ViewModel
             
         }
 
+        public void MoreData()
+        {
+            LinkClick();
+        }
+
+
         sorting Sorting;
         order Order;
         string ApiKey;

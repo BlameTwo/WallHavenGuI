@@ -14,6 +14,7 @@
         <convert1:ViewConvert x:Key="ViewConvert"></convert1:ViewConvert>
     </UserControl.Resources>
     <Border CornerRadius="15">
+        
         <Border.ContextFlyout>
             <MenuFlyout>
                 <MenuFlyoutItem Text="查看" Click="MenuFlyoutItem_Click"/>
@@ -28,6 +29,11 @@
             </MenuFlyout>
         </Border.ContextFlyout>
         <Grid>
+            <musx:TeachingTip x:Name="DownloadTip">
+                <musx:TeachingTip.IconSource>
+                    <musx:SymbolIconSource Symbol="Download" />
+                </musx:TeachingTip.IconSource>
+            </musx:TeachingTip>
             <Border
                     Opacity="1"
                     >

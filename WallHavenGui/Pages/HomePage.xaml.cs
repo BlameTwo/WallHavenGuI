@@ -48,5 +48,6 @@ namespace WallHavenGui.Pages
             
             base.OnNavigatingFrom(e);
         }
+
     }
 }

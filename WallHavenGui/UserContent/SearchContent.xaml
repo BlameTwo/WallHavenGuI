@@ -25,7 +25,7 @@
                         <Setter Target="Select.(StackPanel.Orientation)" Value="Vertical"/>
                         <Setter Target="Select.(FrameworkElement.HorizontalAlignment)" Value="Left"/>
                         <Setter Target="Select.(Grid.RowSpan)" Value="3"/>
-                        <Setter Target="SearchData.(Grid.Column)" Value="1"/>
+                        <Setter Target="Data.(Grid.Column)" Value="1"/>
                         <Setter Target="SearchResultString.(Grid.Column)" Value="1"/>
                         <!--<Setter Target="SearchData.(Background)" Value="red"/>-->
                     </VisualState.Setters>
@@ -134,29 +134,39 @@
             Text="{x:Bind vm.SearchResultText,Mode=TwoWay}" TextWrapping="Wrap" FontWeight="Bold"/>
         </Border>
 
-        <controls:AdaptiveGridView 
-                  Grid.ColumnSpan="2" Grid.Row="3" 
+        <Grid Grid.ColumnSpan="2" Grid.Row="3" x:Name="Data">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <controls:AdaptiveGridView 
                   ItemHeight="150"
                   DesiredWidth="250"
                   x:Name="SearchData"
                   ItemsSource="{x:Bind Mode=TwoWay, Path=vm._SearchData.WallpaperList}"
                   SelectionChanged="{x:Bind vm.Changed}">
-            <controls:AdaptiveGridView.ItemTemplate>
-                <DataTemplate x:Name="HomeTemple" x:DataType="data:Wallpaper">
-                    <datatemple:WallpaperShow MyData="{Binding}"/>
-                </DataTemplate>
-            </controls:AdaptiveGridView.ItemTemplate>
-            <controls:AdaptiveGridView.ItemContainerTransitions>
-                <TransitionCollection>
-                    <EntranceThemeTransition IsStaggeringEnabled="True"/>
-                </TransitionCollection>
-            </controls:AdaptiveGridView.ItemContainerTransitions>
-            <i:Interaction.Behaviors>
-                <core:EventTriggerBehavior EventName="Loaded">
-                    <core:InvokeCommandAction Command="{x:Bind Path=vm.ScrlLoad}" CommandParameter="{x:Bind Path=SearchData}"/>
-                </core:EventTriggerBehavior>
-            </i:Interaction.Behaviors>
-        </controls:AdaptiveGridView>
+                <controls:AdaptiveGridView.ItemTemplate>
+                    <DataTemplate x:Name="HomeTemple" x:DataType="data:Wallpaper">
+                        <datatemple:WallpaperShow MyData="{Binding}"/>
+                    </DataTemplate>
+                </controls:AdaptiveGridView.ItemTemplate>
+                <controls:AdaptiveGridView.ItemContainerTransitions>
+                    <TransitionCollection>
+                        <EntranceThemeTransition IsStaggeringEnabled="True"/>
+                    </TransitionCollection>
+                </controls:AdaptiveGridView.ItemContainerTransitions>
+                <i:Interaction.Behaviors>
+                    <core:EventTriggerBehavior EventName="Loaded">
+                        <core:InvokeCommandAction Command="{x:Bind Path=vm.ScrlLoad}" CommandParameter="{x:Bind Path=SearchData}"/>
+                    </core:EventTriggerBehavior>
+                </i:Interaction.Behaviors>
+            </controls:AdaptiveGridView>
+            <Button Grid.Row="1"
+                HorizontalAlignment="Center" 
+                Content="加载更多"
+                Click="{x:Bind vm.More}"
+                Style="{ThemeResource AccentButtonStyle}"/>
+        </Grid>
         <musx:ProgressBar
             x:Name="SearchState"
             Grid.ColumnSpan="2"

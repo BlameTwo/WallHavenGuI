@@ -55,7 +55,6 @@ namespace WallHavenGui.Pages
         string ApiKey { get; set; }
         bool OpenKey { get; set; }
 
-        Downloads dl = new Downloads();
         private bool isDownloading;
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -245,8 +244,23 @@ namespace WallHavenGui.Pages
         private async void Button_Click_1(object sender, RoutedEventArgs e)
         {
             var folder = KnownFolders.PicturesLibrary;
-            folder =await folder.CreateFolderAsync("WallHavenImages");
+            try
+            {
+                folder = await folder.CreateFolderAsync("WallHavenImages");
+            }
+            catch (Exception)
+            {
+                folder = await folder.GetFolderAsync("WallHavenImages");
+            }
             DownloadTip.Title =  await Downloads.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
+
+            //DownLoadArgs args = new DownLoadArgs()
+            //{
+            //    Url = MyWallpaper.WallpaperUrl,
+            //    Path = folder,
+            //    Name = this.file,
+            //};
+            //await Downloads.AddDownload(args);    
             DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到本机图片库中" : "下载失败了哦！请检查网络。";
             DownloadTip.IsOpen = true;
         }
@@ -260,6 +274,13 @@ namespace WallHavenGui.Pages
             var folder = await pick.PickSingleFolderAsync();
             if (folder != null)
             {
+                //DownLoadArgs args = new DownLoadArgs()
+                //{
+                //    Url = MyWallpaper.WallpaperUrl,
+                //    Path = folder,
+                //    Name = this.file,
+                //};
+                //await Downloads.AddDownload(args);
                 DownloadTip.Title = await Downloads.SaveImage(MyWallpaper.WallpaperUrl, folder,this.file);
                 DownloadTip.Subtitle = DownloadTip.Title == "下载成功！" ? "已经保存到目标文件夹" : "下载失败了哦！请检查网络。";
                 DownloadTip.IsOpen = true;
